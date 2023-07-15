@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {updateAuth} from "../features/spotifyStore";
+import {Button} from "../styled/Button.styled";
 
 function LoginPage({store}) {
     const nav = useNavigate();
@@ -12,7 +13,9 @@ function LoginPage({store}) {
             const trimmedToken = window.location.pathname.split("auth=loggedIn/")[1];
             sessionStorage.setItem("token", trimmedToken)
             dispatch(updateAuth(true));
-            nav("my-library")
+            setTimeout(() => {
+                nav("my-library")
+            }, 500)
         }
     }, [])
     const loginHandler = () => {
@@ -25,10 +28,10 @@ function LoginPage({store}) {
     }
 
     return (
-        <div>
+        <div className="mx-2">
             {store.isLoggedIn ?
-                <button onClick={logoutHandler}>Logout</button> :
-                <button onClick={loginHandler}>Login</button>}
+                <Button className="p-1 w-32 rounded-full font-semibold tracking-wider bg-transparent border-2 border-white hover:border-black hover:bg-white hover:text-black text-white" onClick={logoutHandler}>Logout</Button> :
+                <Button className="p-1 w-32 rounded-full font-semibold tracking-wider bg-transparent border-2 border-white hover:border-black hover:bg-white hover:text-black text-white" onClick={loginHandler}>Login</Button>}
         </div>
     );
 }
