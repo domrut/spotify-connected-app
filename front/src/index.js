@@ -6,11 +6,13 @@ import {Provider} from "react-redux"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import spotifyReducer from "./features/spotifyStore";
+import hamburgerMenuReducer from "./features/hamburgerMenuStore";
 import {BrowserRouter} from "react-router-dom";
 
 const store = configureStore({
     reducer: {
-        spotifyStore: spotifyReducer
+        spotifyStore: spotifyReducer,
+        hamburgerMenuStore: hamburgerMenuReducer
     }
 })
 
