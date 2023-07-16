@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import http from "../plugins/http";
 import {updateError, updatePlaylists} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
-import Playlist from "./Playlist";
+import Playlist from "./searchResult/Playlist";
 
 function Playlists({store}) {
     const dispatch = useDispatch();

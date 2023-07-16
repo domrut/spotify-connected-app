@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {updateAuth} from "../features/spotifyStore";
 import {Button} from "../styled/Button.styled";
 
-function LoginPage({store}) {
+function Auth({store}) {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
@@ -15,11 +15,11 @@ function LoginPage({store}) {
             dispatch(updateAuth(true));
             setTimeout(() => {
                 nav("my-library")
-            }, 500)
+            }, 1000)
         }
     }, [])
     const loginHandler = () => {
-        window.location.href = "http://192.168.0.108:3002/login"
+        window.location.href = "http://192.168.0.104:3002/login"
     }
     const logoutHandler = () => {
         sessionStorage.clear();
@@ -28,12 +28,12 @@ function LoginPage({store}) {
     }
 
     return (
-        <div className="mx-2">
+        <div className="mt-20 sm:ml-20 sm:mt-0">
             {store.isLoggedIn ?
-                <Button className="p-1 w-32 rounded-full font-semibold tracking-wider bg-transparent border-2 border-white hover:border-black hover:bg-white hover:text-black text-white" onClick={logoutHandler}>Logout</Button> :
-                <Button className="p-1 w-32 rounded-full font-semibold tracking-wider bg-transparent border-2 border-white hover:border-black hover:bg-white hover:text-black text-white" onClick={loginHandler}>Login</Button>}
+                <Button className="btn-nav" onClick={logoutHandler}>Logout</Button> :
+                <Button className="btn-nav" onClick={loginHandler}>Login</Button>}
         </div>
     );
 }
 
-export default LoginPage;
+export default Auth;

@@ -1,4 +1,4 @@
-const serverUrl = "http://192.168.0.108:3002";
+const serverUrl = "http://192.168.0.104:3002";
 
 export default {
     get: async (url) => {
@@ -15,6 +15,7 @@ export default {
         };
 
         const res = await fetch(`${serverUrl}/${url}`, options);
+
 
         return await res.json();
     }

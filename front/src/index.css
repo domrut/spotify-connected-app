@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: black;
+.btn-nav {
+  @apply p-1 w-32 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-base sm:text-sm;
+}
+
+.btn-nav:hover {
+  @apply border-black bg-white text-black
 }
