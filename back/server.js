@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.listen(3002, '192.168.0.108');
+app.listen(3002, '192.168.0.104');
 
 
 app.get('/login', (req, res) => {
@@ -26,7 +26,6 @@ app.get('/login', (req, res) => {
     })
     res.redirect("https://accounts.spotify.com/authorize?" + auth_query_parameters.toString())
 })
-
 app.get("/callback", async (req, res) => {
     const code = req.query.code;
     let body = new URLSearchParams({
@@ -46,8 +45,6 @@ app.get("/callback", async (req, res) => {
     const data = await response.json();
     res.redirect(SERVER_URL + "auth=loggedIn/" + data.access_token);
 })
-
-
 const spotifyRequest = async (url, token) => {
     const response = await fetch(`${url}`, {
         method: "get",
@@ -57,15 +54,28 @@ const spotifyRequest = async (url, token) => {
     })
     return await response.json();
 }
-
 app.post("/getMyPlaylists", async (req, res) => {
     const {token} = req.body;
     const data = await spotifyRequest("https://api.spotify.com/v1/me/playlists", token)
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
-
 app.post("/playListTracks", async (req, res) => {
     const {url, token} = req.body;
     const data = await spotifyRequest(url, token);
-    res.send({data})
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/search", async (req, res) => {
+    const {query, category, token} = req.body;
+    const data = await spotifyRequest(`https://api.spotify.com/v1/search?q=${query}&type=${category}`, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/nextPage", async (req, res) => {
+    const {url, token} = req.body;
+    const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/prevPage", async (req, res) => {
+    const {url, token} = req.body;
+    const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
