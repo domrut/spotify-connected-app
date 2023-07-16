@@ -15,6 +15,8 @@ function Layout({store}) {
         <div className="m-auto max-w-[1440px] px-8 xl:px-14 font-poppins">
             <Nav store={store}/>
             <Nav store={store}/>
+            <Nav store={store}/>
+            <Nav store={store}/>
             <main className="m-auto rounded-md border-2 p-5 sm:p-10 border-gray-800">
                 <Routes>
                     {!store.isLoggedIn && <Route path="/" element={<Home/>}/>}
