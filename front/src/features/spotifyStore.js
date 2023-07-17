@@ -7,7 +7,8 @@ export const spotifySlice = createSlice({
         isLoggedIn: false,
         playlists: [],
         tracks: [],
-        searchResult: []
+        searchResult: [],
+        recentSearches: []
     }, reducers: {
         updateError: (state, action) => {
             state.error = action.payload;
@@ -23,10 +24,22 @@ export const spotifySlice = createSlice({
         },
         updateSearchResults: (state, action) => {
             state.searchResult = action.payload;
+        },
+        updateRecentSearches: (state, action) => {
+            const searchesArray = state.recentSearches;
+            if (searchesArray.filter(item => item === action.payload).length === 1) {
+                state.recentSearches = searchesArray;
+            } else {
+                if (searchesArray.length === 5) {
+                    searchesArray.pop();
+                }
+                searchesArray.unshift(action.payload);
+                state.recentSearches = searchesArray;
+            }
         }
     }
 });
 
-export const {updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
+export const {updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
 
 export default spotifySlice.reducer;

@@ -5,6 +5,7 @@ import http from "../plugins/http";
 import {Button} from "../styled/Button.styled";
 import {updateError, updatePlaylists, updateSearchResults} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
+import MyTopSpotify from "../components/MyTopSpotify";
 
 function SearchPage({store}) {
 
@@ -29,23 +30,28 @@ function SearchPage({store}) {
 
     return (
         <>
-            <Search/>
-            <div>
-                {store.searchResult.length !== 0 && Object.values(store.searchResult)[0].items.map((el, index) => {
-                    return <SearchResult type={Object.keys(store.searchResult)} data={el} index={index} key={index}/>
-                })
+            <div className="flex flex-col-reverse gap-y-2 sm:gap-x-2 md:flex-row">
+                <Search store={store}/>
+                <MyTopSpotify store={store}/>
+            </div>
+            <div className="section-styling my-2">
+                <div>
+                    {store.searchResult.length !== 0 && Object.values(store.searchResult)[0].items.map((el, index) => {
+                        return <SearchResult type={Object.keys(store.searchResult)} data={el} index={index} key={index}/>
+                    })
+                    }
+                </div>
+                {store.searchResult.length !== 0 &&
+                    <div className="mt-10 text-center">
+                        {Object.values(store.searchResult)[0].previous !== null &&
+                            <Button className="mr-5"
+                                    onClick={() => prevPage(Object.values(store.searchResult)[0].previous)}>Previous
+                                page</Button>}
+                        {Object.values(store.searchResult)[0].next !== null &&
+                            <Button onClick={() => nextPage(Object.values(store.searchResult)[0].next)}>Next page</Button>}
+                    </div>
                 }
             </div>
-            {store.searchResult.length !== 0 &&
-                <div className="mt-10 text-center">
-                    {Object.values(store.searchResult)[0].previous !== null &&
-                        <Button className="mr-5"
-                                onClick={() => prevPage(Object.values(store.searchResult)[0].previous)}>Previous
-                            page</Button>}
-                    {Object.values(store.searchResult)[0].next !== null &&
-                        <Button onClick={() => nextPage(Object.values(store.searchResult)[0].next)}>Next page</Button>}
-                </div>
-            }
         </>
     );
 }
