@@ -4,10 +4,49 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn-nav {
-  @apply p-1 w-32 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-base sm:text-sm;
+@layer components {
+    .section-styling {
+        @apply rounded-md bg-sectionColor p-5
+    }
+
+    .top-artist-image {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+    }
+
+    .top-artist-card {
+        min-width: 160px;
+        text-align: -webkit-center;
+    }
 }
 
-.btn-nav:hover {
-  @apply border-black bg-white text-black
+p {
+  @apply whitespace-nowrap
+}
+
+body {
+    @apply bg-black box-border
+}
+
+.btn-nav {
+    @apply p-1 w-24 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-sm sm:text-base;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

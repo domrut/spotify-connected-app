@@ -10,7 +10,7 @@ function Nav({store}) {
     const hambStore = useSelector(store => store.hamburgerMenuStore);
 
     return (
-        <nav className="flex justify-between py-4 bg-[#121212] items-center">
+        <nav className="flex justify-between py-4 items-center section-styling my-2">
             <div className="w-10 h-10">
                 <NavLink to="/">
                     <svg className="fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -22,8 +22,12 @@ function Nav({store}) {
             <Menu className="hidden sm:flex">
                 {store.isLoggedIn &&
                     <>
-                        <Button as="a" href="/search" className="btn-nav">Search</Button>
-                        <Button as="a" href="/my-library" className="btn-nav">My Library</Button>
+                        <NavLink to="/search">
+                            <Button className="btn-nav">Search</Button>
+                        </NavLink>
+                        <NavLink to="/my-library">
+                            <Button className="btn-nav">My Library</Button>
+                        </NavLink>
                     </>
                 }
                 <Auth store={store}/>
@@ -32,8 +36,12 @@ function Nav({store}) {
                 <MobileMenu>
                     {store.isLoggedIn &&
                         <>
-                            <Button as="a" href="/search" className="btn-nav">Search</Button>
-                            <Button as="a" href="/my-library" className="btn-nav">My Library</Button>
+                            <NavLink to="/search">
+                                <Button className="btn-nav">Search</Button>
+                            </NavLink>
+                            <NavLink to="/my-library">
+                                <Button className="btn-nav">My Library</Button>
+                            </NavLink>
                         </>
                     }
                     <Auth store={store}/>

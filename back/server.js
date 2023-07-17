@@ -21,7 +21,7 @@ app.get('/login', (req, res) => {
     let auth_query_parameters = new URLSearchParams({
         response_type: "code",
         client_id: CLIENT_ID,
-        scope: "user-library-read, playlist-read-private",
+        scope: "user-library-read, user-top-read, playlist-read-private",
         redirect_uri: REDIRECT_URI
     })
     res.redirect("https://accounts.spotify.com/authorize?" + auth_query_parameters.toString())
@@ -57,6 +57,12 @@ const spotifyRequest = async (url, token) => {
 app.post("/getMyPlaylists", async (req, res) => {
     const {token} = req.body;
     const data = await spotifyRequest("https://api.spotify.com/v1/me/playlists", token)
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/getMyTopArtists", async (req, res) => {
+    const {token} = req.body;
+    console.log(req.body)
+    const data = await spotifyRequest("https://api.spotify.com/v1/me/top/artists?limit=5", token)
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
 app.post("/playListTracks", async (req, res) => {
