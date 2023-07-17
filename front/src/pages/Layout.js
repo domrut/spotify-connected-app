@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Route, Routes} from "react-router";
+import {Route, Routes, useNavigate} from "react-router";
 import {Outlet} from "react-router-dom";
 import Playlists from "../components/Playlists";
 import Tracks from "../components/Tracks";
@@ -10,11 +10,10 @@ import Loader from "../components/Loader";
 import SearchPage from "./SearchPage";
 
 function Layout({store}) {
-
     return (
-        <div className="m-auto max-w-[1440px] px-8 xl:px-14 font-poppins">
+        <div className="m-auto px-2 font-poppins">
             <Nav store={store}/>
-            <main className="m-auto rounded-md border-2 p-5 sm:p-10 border-gray-800">
+            <main className="m-auto">
                 <Routes>
                     {!store.isLoggedIn && <Route path="/" element={<Home/>}/>}
                     {store.isLoggedIn &&

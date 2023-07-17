@@ -17,7 +17,7 @@ function SearchResult({data, index, type}) {
     }
 
     return (
-        <div key={index}>
+        <div className="text-white" key={index}>
             {whichRender(type[0])}
         </div>
     );
