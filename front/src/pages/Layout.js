@@ -8,6 +8,7 @@ import Error404 from "../components/error404";
 import Home from "../components/Home";
 import Loader from "../components/Loader";
 import SearchPage from "./SearchPage";
+import Footer from "./Footer";
 
 function Layout({store}) {
     return (
@@ -32,6 +33,7 @@ function Layout({store}) {
                     <Route path="*" element={<Error404/>}/>
                 </Routes>
             </main>
+            <Footer/>
         </div>
     );
 }
