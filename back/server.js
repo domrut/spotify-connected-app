@@ -61,7 +61,6 @@ app.post("/getMyPlaylists", async (req, res) => {
 })
 app.post("/getMyTopArtists", async (req, res) => {
     const {token} = req.body;
-    console.log(req.body)
     const data = await spotifyRequest("https://api.spotify.com/v1/me/top/artists?limit=5", token)
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
@@ -77,6 +76,7 @@ app.post("/search", async (req, res) => {
 })
 app.post("/nextPage", async (req, res) => {
     const {url, token} = req.body;
+    console.log(req.body);
     const data = await spotifyRequest(url, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })

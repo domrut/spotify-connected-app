@@ -2,8 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Button} from "../styled/Button.styled";
 import http from "../plugins/http";
 import {useDispatch} from "react-redux";
-import {updateError, updateRecentSearches, updateSearchResults} from "../features/spotifyStore";
-import MyTopSpotify from "./MyTopSpotify";
+import {
+    updateError,
+    updateRecentSearches,
+    updateSearchResults
+} from "../features/spotifyStore";
 
 function Search({store}) {
 
@@ -50,7 +53,7 @@ function Search({store}) {
                 </label>
                 <Button className="btn-nav" onClick={(e) => searchHandler(e)}>Search</Button>
             </form>
-            <div className="flex max-w-2xl flex-col items-center mt-5 text-white min-h-[3.25rem]">
+            <div className="flex flex-col items-center mt-5 text-white min-h-[3.25rem]">
                 <p className="text-sm mb-5 sm:mb-0">Recent searches</p>
                 <div className="flex w-full overflow-x-scroll">
                     {store.recentSearches && store.recentSearches.map((el, index) => {
