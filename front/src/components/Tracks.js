@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import Track from "./searchResult/Track";
+import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
 import {updateError, updateSearchResults, updateTracks} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";

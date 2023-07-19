@@ -8,21 +8,35 @@
     .section-styling {
         @apply rounded-md bg-sectionColor p-5
     }
-
     .top-artist-image {
         width: 120px;
         height: 120px;
         object-fit: cover;
     }
-
     .top-artist-card {
         min-width: 160px;
         text-align: -webkit-center;
+    }
+    .album-card {
+        min-width: 220px;
+        max-width: 220px;
+        min-height: 255px;
+        /*overflow: hidden;*/
+    }
+    .album-card-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 0 auto;
     }
 }
 
 p {
   @apply whitespace-nowrap
+}
+
+* {
+    @apply transition duration-300 ease-in
 }
 
 body {

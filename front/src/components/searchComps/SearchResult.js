@@ -5,10 +5,17 @@ import Playlist from "./searchResult/Playlist";
 
 function SearchResult({data, index, type}) {
 
+    console.log("searchresult rendered")
     const whichRender = (type) => {
         switch (type) {
             case "albums":
-                return <Album data={data} />
+                return <Album
+                    name={data.name}
+                    releaseDate={data.release_date}
+                    artists={data.artists}
+                    id={data.id}
+                    image={data.images}
+                />
             case "artists":
                 return <Artist data={data} />
             case "playlists":
@@ -17,9 +24,9 @@ function SearchResult({data, index, type}) {
     }
 
     return (
-        <div className="text-white" key={index}>
+        <>
             {whichRender(type[0])}
-        </div>
+        </>
     );
 }
 

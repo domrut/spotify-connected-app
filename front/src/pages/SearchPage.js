@@ -1,7 +1,7 @@
 import React from 'react';
-import Search from "../components/Search";
+import Search from "../components/searchComps/Search";
 import MyTopSpotify from "../components/MyTopSpotify";
-import SearchResults from "../components/SearchResults";
+import SearchResults from "../components/searchComps/SearchResults";
 
 function SearchPage({store}) {
     return (
