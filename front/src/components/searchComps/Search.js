@@ -33,7 +33,7 @@ function Search({store}) {
     return (
         <div className="flex-3 flex flex-col justify-between section-styling">
             {error && <p className="text-red-500 font-bold py-2 text-center">{error}</p>}
-            <p className="text-white font-bold text-xl text-center my-6">Find something new</p>
+            <p className="text-white font-bold whitespace-normal text-xl text-center my-6">Find something new</p>
             <SearchForm input={input} selectedCategory={setSelectedCategory} searchHandler={searchHandler}/>
             <div className="flex flex-col items-center mt-5 text-white min-h-[3.25rem]">
                 <p className="text-sm mb-5 sm:mb-0">Recent searches</p>

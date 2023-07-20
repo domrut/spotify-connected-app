@@ -36,16 +36,16 @@ function SearchResults({store}) {
 
     return (
         <div className="section-styling my-2">
-            <p className="text-white text-center text-xl mb-5">Search results</p>
+            <p className="text-white text-center text-xl mb-10">Search results</p>
             <label className="flex m-auto text-white max-w-xs mb-5">
                 <input
-                    className="my-2 outline-0 w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
+                    className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
                     type="text"
                     onChange={(e) => filterHandler(e.target.value)}
                     placeholder="Filter by name"/>
             </label>
             <button onClick={fetchAdditionalResults}>clik</button>
-            <div className="flex-wrap flex h-[800px] justify-center max-h-[800px] overflow-y-scroll">
+            <div className="flex-wrap block 2xs:flex h-[800px] justify-center max-h-[800px] overflow-y-scroll">
                 {filteredArray.map((el, index) => {
                     switch (Object.keys(store.searchResult)[0]) {
                         case "albums":

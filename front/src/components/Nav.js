@@ -1,13 +1,16 @@
 import React, {useEffect} from 'react';
-import Auth from "./Auth";
 import {Menu, MobileMenu, Modal} from "../styled/Header.styled";
 import Hamburger from "./Hamburger";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {Button} from "../styled/Button.styled";
+import NavItems from "./NavItems";
 
 function Nav({store}) {
     const hambStore = useSelector(store => store.hamburgerMenuStore);
+
+    useEffect(() => {
+        sessionStorage.getItem("token")
+    }, [])
 
     return (
         <nav className="flex justify-between py-4 items-center section-styling my-2">
@@ -20,31 +23,11 @@ function Nav({store}) {
                 </NavLink>
             </div>
             <Menu className="hidden sm:flex">
-                {store.isLoggedIn &&
-                    <>
-                        <NavLink to="/search">
-                            <Button className="btn-nav">Search</Button>
-                        </NavLink>
-                        <NavLink to="/my-library">
-                            <Button className="btn-nav">My Library</Button>
-                        </NavLink>
-                    </>
-                }
-                <Auth store={store}/>
+                <NavItems store={store}/>
             </Menu>
             <Modal className="sm:hidden" isOpen={hambStore.isOpen}>
                 <MobileMenu>
-                    {store.isLoggedIn &&
-                        <>
-                            <NavLink to="/search">
-                                <Button className="btn-nav">Search</Button>
-                            </NavLink>
-                            <NavLink to="/my-library">
-                                <Button className="btn-nav">My Library</Button>
-                            </NavLink>
-                        </>
-                    }
-                    <Auth store={store}/>
+                    <NavItems store={store}/>
                 </MobileMenu>
             </Modal>
             <Hamburger/>

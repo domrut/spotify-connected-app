@@ -9,7 +9,12 @@ module.exports = {
       poppins: ['Poppins', 'sans-serif'],
     },
     extend: {
+      transitionProperty: {
+        height: 'max-height'
+      },
       screens: {
+        "2xs": "350px",
+        "xs": "450px",
         "1.5xl": "1450px",
         "3xl": "1792px",
         "4xl": "2025px"
