@@ -1,4 +1,4 @@
-const serverUrl = "http://192.168.0.104:3002";
+const serverUrl = "http://192.168.0.105:3002";
 
 export default {
     get: async (url) => {

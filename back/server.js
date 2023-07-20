@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.listen(3002, '192.168.0.104');
+app.listen(3002, '192.168.0.105');
 
 
 app.get('/login', (req, res) => {
@@ -65,6 +65,11 @@ app.post("/getMyTopArtists", async (req, res) => {
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
 app.post("/playListTracks", async (req, res) => {
+    const {url, token} = req.body;
+    const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/getTracksInfo", async (req, res) => {
     const {url, token} = req.body;
     const data = await spotifyRequest(url, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
