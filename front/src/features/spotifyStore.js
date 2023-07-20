@@ -7,6 +7,8 @@ export const spotifySlice = createSlice({
         isLoggedIn: false,
         playlists: [],
         tracks: [],
+        trackURIs: [],
+        tracksAudioData: [],
         searchResult: [],
         recentSearches: [],
         additionalSearches: []
@@ -19,6 +21,12 @@ export const spotifySlice = createSlice({
         },
         updateTracks: (state, action) => {
             state.tracks = action.payload;
+        },
+        updateTrackURIs: (state, action) => {
+            state.trackURIs = action.payload;
+        },
+        updatetracksAudioData: (state, action) => {
+            state.tracksAudioData = action.payload;
         },
         updateAuth: (state, action) => {
             state.isLoggedIn = action.payload;
@@ -48,6 +56,6 @@ export const spotifySlice = createSlice({
     }
 });
 
-export const {addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
+export const {updatetracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
 
 export default spotifySlice.reducer;

@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {updateAuth} from "../features/spotifyStore";
 import {Button} from "../styled/Button.styled";
 
-function Auth({store}) {
+function Auth() {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ function Auth({store}) {
         }
     }, [])
     const loginHandler = () => {
-        window.location.href = "http://192.168.0.104:3002/login"
+        window.location.href = "http://192.168.0.105:3002/login"
     }
     const logoutHandler = () => {
         sessionStorage.clear();
@@ -29,7 +29,7 @@ function Auth({store}) {
 
     return (
         <div className="mt-20 sm:ml-20 sm:mt-0">
-            {store.isLoggedIn ?
+            {sessionStorage.getItem("token") ?
                 <Button className="btn-nav" onClick={logoutHandler}>Logout</Button> :
                 <Button className="btn-nav" onClick={loginHandler}>Login</Button>}
         </div>

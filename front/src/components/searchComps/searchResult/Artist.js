@@ -4,6 +4,7 @@ function Artist({data}) {
     return (
         <div>
             <p>{data.name}</p>
+            {console.log("artist rendered")}
         </div>
     );
 }

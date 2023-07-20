@@ -16,8 +16,8 @@ function Layout({store}) {
             <Nav store={store}/>
             <main className="m-auto">
                 <Routes>
-                    {!store.isLoggedIn && <Route path="/" element={<Home/>}/>}
-                    {store.isLoggedIn &&
+                    {!sessionStorage.getItem("token") && <Route path="/" element={<Home/>}/>}
+                    {sessionStorage.getItem("token") &&
                         <>
                             <Route path="/search" element={<SearchPage store={store}/>}/>
                             <Route path="/auth=loggedIn/*" element={<Loader/>}/>
@@ -27,7 +27,7 @@ function Layout({store}) {
                                            <Playlists store={store}/>
                                            <Outlet/>
                                        </>)}>
-                                <Route path="/my-library/playlist/:id/tracks" element={<Tracks store={store}/>}/>
+                                <Route path="/my-library/:type/:id/tracks" element={<Tracks store={store}/>}/>
                             </Route>
                         </>}
                     <Route path="*" element={<Error404/>}/>

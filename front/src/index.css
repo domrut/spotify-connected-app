@@ -8,21 +8,39 @@
     .section-styling {
         @apply rounded-md bg-sectionColor p-5
     }
-
     .top-artist-image {
         width: 120px;
         height: 120px;
         object-fit: cover;
     }
-
     .top-artist-card {
         min-width: 160px;
         text-align: -webkit-center;
     }
+    .album-card-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+    .collapsed {
+        overflow: hidden;
+        transition: all 0.3s ease;
+        height: 0;
+    }
+}
+
+input, select {
+    -webkit-border-radius:0;
+    border-radius:0;
 }
 
 p {
   @apply whitespace-nowrap
+}
+
+* {
+    @apply transition duration-300 ease-in
 }
 
 body {
@@ -30,7 +48,11 @@ body {
 }
 
 .btn-nav {
-    @apply p-1 w-24 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-sm sm:text-base;
+    @apply p-1 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-sm sm:text-base;
+}
+
+.btn-nav:hover {
+    @apply border-black bg-white text-black
 }
 
 ::-webkit-scrollbar {
