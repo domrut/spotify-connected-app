@@ -17,6 +17,7 @@ function Search({store}) {
     const [error, setError] = useState("");
     const searchHandler = async (e) => {
         e.preventDefault();
+        dispatch(updateSearchResults([]))
         setError("");
         if (input.current.value <= 1) return setError("Search input is empty")
         const res = await http.post("search", {

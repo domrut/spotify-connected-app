@@ -9,6 +9,7 @@ import Home from "../components/Home";
 import Loader from "../components/Loader";
 import SearchPage from "./SearchPage";
 import Footer from "./Footer";
+import ArtistPage from "./ArtistPage";
 
 function Layout({store}) {
     return (
@@ -20,6 +21,7 @@ function Layout({store}) {
                     {sessionStorage.getItem("token") &&
                         <>
                             <Route path="/search" element={<SearchPage store={store}/>}/>
+                            <Route path="/artists/:id/albums" element={<ArtistPage store={store}/>}/>
                             <Route path="/auth=loggedIn/*" element={<Loader/>}/>
                             <Route path="/my-library"
                                    element={(
@@ -29,7 +31,8 @@ function Layout({store}) {
                                        </>)}>
                                 <Route path="/my-library/:type/:id/tracks" element={<Tracks store={store}/>}/>
                             </Route>
-                        </>}
+                        </>
+                    }
                     <Route path="*" element={<Error404/>}/>
                 </Routes>
             </main>

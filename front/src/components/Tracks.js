@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
-import {updateError, updateTracks, updatetracksAudioData, updateTrackURIs} from "../features/spotifyStore";
+import {updateError, updateTracks, updateTracksAudioData, updateTrackURIs} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router";
 
@@ -27,7 +27,7 @@ function Tracks({store}) {
                 }
             }
             const fetchAudioData = await http.post("getTracksInfo", {url: `https://api.spotify.com/v1/audio-features?ids=${audioArray.join(",")}`, token: sessionStorage.getItem("token")})
-            dispatch(updatetracksAudioData(fetchAudioData.data.audio_features))
+            dispatch(updateTracksAudioData(fetchAudioData.data.audio_features))
         }
         fetchTracks();
     }, [params.id, params.type])

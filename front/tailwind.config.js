@@ -12,6 +12,9 @@ module.exports = {
       transitionProperty: {
         height: 'max-height'
       },
+      fontSize: {
+        "2xs": "0.6rem"
+      },
       screens: {
         "2xs": "350px",
         "xs": "450px",

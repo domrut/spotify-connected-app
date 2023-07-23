@@ -13,9 +13,7 @@ function Auth() {
             const trimmedToken = window.location.pathname.split("auth=loggedIn/")[1];
             sessionStorage.setItem("token", trimmedToken)
             dispatch(updateAuth(true));
-            setTimeout(() => {
-                nav("my-library")
-            }, 1000)
+            nav("my-library")
         }
     }, [])
     const loginHandler = () => {

@@ -18,9 +18,16 @@ function Playlists({store}) {
     }, [])
 
     return (
-        <div>
+        <div className="flex flex-wrap justify-center section-styling">
             {store.playlists && store.playlists.map((el, index) => {
-                return <Playlist key={index} data={el}/>
+                return <Playlist
+                    key={index}
+                    name={el.name}
+                    owner={el.owner.display_name}
+                    id={el.id}
+                    image={el.images}
+                    trackTotal={el.tracks.total}
+                />
             })}
         </div>
     );

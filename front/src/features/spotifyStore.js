@@ -11,7 +11,8 @@ export const spotifySlice = createSlice({
         tracksAudioData: [],
         searchResult: [],
         recentSearches: [],
-        additionalSearches: []
+        additionalSearches: [],
+        artistAlbums: []
     }, reducers: {
         updateError: (state, action) => {
             state.error = action.payload;
@@ -25,7 +26,7 @@ export const spotifySlice = createSlice({
         updateTrackURIs: (state, action) => {
             state.trackURIs = action.payload;
         },
-        updatetracksAudioData: (state, action) => {
+        updateTracksAudioData: (state, action) => {
             state.tracksAudioData = action.payload;
         },
         updateAuth: (state, action) => {
@@ -34,7 +35,7 @@ export const spotifySlice = createSlice({
         updateSearchResults: (state, action) => {
             state.additionalSearches = [];
             state.searchResult = action.payload;
-            state.additionalSearches.push(...Object.values(action.payload)[0].items)
+            action.payload.length !== 0 && state.additionalSearches.push(...Object.values(action.payload)[0].items)
         },
         addSearchResults: (state, action) => {
             if (state.additionalSearches.length >= Object.values(state.searchResult)[0].total) return;
@@ -52,10 +53,13 @@ export const spotifySlice = createSlice({
                 searchesArray.unshift(action.payload);
                 state.recentSearches = searchesArray;
             }
-        }
+        },
+        updateArtistAlbums: (state, action) => {
+            state.artistAlbums = action.payload;
+        },
     }
 });
 
-export const {updatetracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
+export const {updateArtistAlbums, updateTracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
 
 export default spotifySlice.reducer;

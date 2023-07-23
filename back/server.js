@@ -90,3 +90,19 @@ app.post("/prevPage", async (req, res) => {
     const data = await spotifyRequest(url, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
+app.post("/getArtistAlbums", async (req, res) => {
+    const {id, token} = req.body;
+    const data = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}/albums?include_groups=album`, token);
+    const dataArtist = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}`, token);
+    (data.error || dataArtist.error) ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data, artist: dataArtist});
+})
+app.post("/getArtist", async (req, res) => {
+    const {id, token} = req.body;
+    const data = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}`, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/getRelatedArtists", async (req, res) => {
+    const {id, token} = req.body;
+    const data = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}/related-artists`, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})

@@ -6,6 +6,7 @@ import Loader from "../Loader";
 import Album from "./searchResult/Album";
 import Artist from "./searchResult/Artist";
 import Playlist from "./searchResult/Playlist";
+import {data} from "autoprefixer";
 
 function SearchResults({store}) {
 
@@ -34,9 +35,51 @@ function SearchResults({store}) {
         setFilteredArray(store.additionalSearches.filter(item => item.name.toLowerCase().includes(value.toLowerCase())))
     }
 
+    const item = (type) => {
+        if (type === "albums") {
+            return filteredArray.map((el, index) => {
+                    return <Album
+                        key={index}
+                        name={el.name}
+                        albumType={el.album_type}
+                        releaseDate={el.release_date}
+                        artists={el.artists}
+                        id={el.id}
+                        image={el.images}
+                    />
+                }
+            )
+        }
+        if (type === "artists") {
+            return filteredArray.map((el, index) => {
+                    return <Artist
+                        key={index}
+                        name={el.name}
+                        id={el.id}
+                        image={el.images}
+                        genres={el.genres.slice(0, 2)}
+                        followers={el.followers.total}
+                    />
+                }
+            )
+        }
+        if (type === "playlists") {
+            return filteredArray.map((el, index) => {
+                    return <Playlist
+                        key={index}
+                        name={el.name}
+                        owner={el.owner.display_name}
+                        id={el.id}
+                        image={el.images}
+                        trackTotal={el.tracks.total}
+                    />
+                }
+            )
+        }
+    }
+
     return (
-        <div className="section-styling my-2">
-            <p className="text-white text-center text-xl mb-10">Search results</p>
+        <>
             <label className="flex m-auto text-white max-w-xs mb-5">
                 <input
                     className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
@@ -44,34 +87,18 @@ function SearchResults({store}) {
                     onChange={(e) => filterHandler(e.target.value)}
                     placeholder="Filter by name"/>
             </label>
-            <button onClick={fetchAdditionalResults}>clik</button>
-            <div className="flex-wrap block 2xs:flex h-[800px] justify-center max-h-[800px] overflow-y-scroll">
-                {filteredArray.map((el, index) => {
-                    switch (Object.keys(store.searchResult)[0]) {
-                        case "albums":
-                            return <Album
-                                key={index}
-                                name={el.name}
-                                albumType={el.album_type}
-                                releaseDate={el.release_date}
-                                artists={el.artists}
-                                id={el.id}
-                                image={el.images}
-                            />
-                        case "artists":
-                            return <Artist
-                                key={index}
-                                data={el}/>
-                        case "playlists":
-                            return <Playlist
-                                key={index}
-                                data={el}/>
-                    }
-                })
-                }
+            <div className="flex-wrap block 2xs:flex h-[800px] content-start justify-center max-h-[800px] overflow-y-scroll">
+                {item(Object.keys(store.searchResult)[0])}
                 {isLoading && <Loader/>}
+                {Object.values(store.searchResult)[0].next !== null &&
+                    <div className="w-full text-center">
+                        <button className="text-white mt-5 font-semibold text-base"
+                                onClick={fetchAdditionalResults}>Load more
+                        </button>
+                    </div>
+                }
             </div>
-        </div>
+        </>
     );
 }
 
