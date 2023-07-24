@@ -1,14 +1,23 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
+import {updateTracks, updateTracksAudioData, updateTrackURIs} from "../../../features/spotifyStore";
+import {useDispatch} from "react-redux";
 
 function Album({name, image, releaseDate, artists, id, albumType}) {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const clearStoreAndNavigate = (id) => {
+        dispatch(updateTracks([]))
+        dispatch(updateTrackURIs([]))
+        dispatch(updateTracksAudioData([]))
+        nav(`/albums/${id}/tracks`)
+    }
     return (
         <div
             className="text-white cursor-pointer overflow-hidden relative flex xs:inline w-[90%] xs:w-[160px] sm:w-[220px] h-[60px] 2xs:h-[100px] xs:h-[260px] sm:h-[300px] p-0 xs:p-3 sm:p-6 bg-neutral-900 hover:bg-neutral-800 m-2 mb-4 2xs:mb-0 rounded-lg">
             <div className="absolute top-0 bottom-0 left-0 right-0 w-full h-full"
-                 onClick={() => nav(`/albums/${id}/tracks`)}>
+                 onClick={() => clearStoreAndNavigate(id)}>
             </div>
             {image.length !== 0 ?
                 <img

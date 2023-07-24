@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import http from "../plugins/http";
-import {updateError, updatePlaylists} from "../features/spotifyStore";
+import {
+    updateError,
+    updatePlaylists,
+    updateTracks,
+    updateTracksAudioData,
+    updateTrackURIs
+} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import Playlist from "./searchComps/searchResult/Playlist";
 
@@ -8,6 +14,9 @@ function Playlists({store}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(updateTracks([]))
+        dispatch(updateTrackURIs([]))
+        dispatch(updateTracksAudioData([]))
         const getMyPlaylists = async () => {
             const res = await http.post("getMyPlaylists", {token: sessionStorage.getItem("token")});
             res.error ?

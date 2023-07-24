@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import http from "../../plugins/http";
 import {addSearchResults, updateError} from "../../features/spotifyStore";
 import {useDispatch} from "react-redux";
-import Loader from "../Loader";
+import Loader from "../../plugins/Loader";
 import Album from "./searchResult/Album";
 import Artist from "./searchResult/Artist";
 import Playlist from "./searchResult/Playlist";
-import {data} from "autoprefixer";
 
 function SearchResults({store}) {
 

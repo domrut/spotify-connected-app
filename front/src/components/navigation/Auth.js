@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
-import {updateAuth} from "../features/spotifyStore";
-import {Button} from "../styled/Button.styled";
+import {updateAuth} from "../../features/spotifyStore";
+import {Button} from "../../styled/Button.styled";
 
 function Auth() {
     const nav = useNavigate();

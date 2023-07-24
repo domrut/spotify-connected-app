@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
     return (
-        <div className="section-styling mt-2 h-[200px]">
+        <div className="section-styling h-2.5 absolute bottom-0 w-full">
 
         </div>
     );

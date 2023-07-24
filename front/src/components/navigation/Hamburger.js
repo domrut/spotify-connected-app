@@ -1,6 +1,6 @@
 import React from 'react';
-import {HamburgerStyled} from "../styled/Header.styled";
-import {updateHamburgerMenu} from "../features/hamburgerMenuStore";
+import {HamburgerStyled} from "../../styled/Header.styled";
+import {updateHamburgerMenu} from "../../features/hamburgerMenuStore";
 import {useDispatch, useSelector} from "react-redux";
 function Hamburger() {
 

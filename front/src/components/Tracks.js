@@ -1,42 +1,82 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
-import http from "../plugins/http";
-import {updateError, updateTracks, updateTracksAudioData, updateTrackURIs} from "../features/spotifyStore";
-import {useDispatch} from "react-redux";
-import {useParams} from "react-router";
 
-function Tracks({store}) {
-    const dispatch = useDispatch();
-    const params = useParams();
+function Tracks({store, type}) {
+    const [filteredArray, setFilteredArray] = useState(store.tracks)
+    const filterHandler = (value) => {
+        const filterTempo = store.tracksAudioData.filter(item => item.tempo >= value);
+        let arr;
+        if (type === "playlists") arr = store.tracks.filter(item => filterTempo.some(el => item.track.uri === el.uri))
+        if (type === "albums") arr = store.tracks.filter(item => filterTempo.some(el => item.uri === el.uri))
+        setFilteredArray(arr)
+    }
 
-    useEffect(() => {
-        const fetchTracks = async() => {
-            let audioArray = [];
-            const res = await http.post("playListTracks", {url: `https://api.spotify.com/v1/${params.type}/${params.id}/tracks`, token: sessionStorage.getItem("token")});
-            if (res.error) {
-                dispatch(updateError({code: res.error.status, message: res.error.message}))
-            } else {
-                dispatch(updateTracks(res.data.items))
-                if (params.type === "playlists") {
-                    dispatch(updateTrackURIs(res.data.items.map(el => ({uri:el.track.uri, selected: false}))))
-                    audioArray = res.data.items.map(el => el.track.id)
-                }
-                if (params.type === "albums") {
-                    dispatch(updateTrackURIs(res.data.items.map(el => ({uri:el.uri, selected: false}))))
-                    audioArray = res.data.items.map(el => el.id)
-                }
-            }
-            const fetchAudioData = await http.post("getTracksInfo", {url: `https://api.spotify.com/v1/audio-features?ids=${audioArray.join(",")}`, token: sessionStorage.getItem("token")})
-            dispatch(updateTracksAudioData(fetchAudioData.data.audio_features))
+    const items = () => {
+        if (type === "playlists") {
+            console.log(filteredArray)
+            return filteredArray.map((el, index) => {
+                return <Track
+                    artists={el.track.artists}
+                    duration={el.track.duration_ms}
+                    explicit={el.track.explicit}
+                    id={el.track.id}
+                    uri={el.track.uri}
+                    name={el.track.name}
+                    listen={el.track.preview_url}
+                    index={index}
+                    added={el.added_at}
+                    tempo={store.tracksAudioData[index].tempo}
+                    selectedTracks={store.selectedTrackURIs}
+                    key={index}
+                />
+            })
         }
-        fetchTracks();
-    }, [params.id, params.type])
+        if (type === "albums") {
+            return filteredArray.map((el, index) => {
+                return <Track
+                    artists={el.artists}
+                    duration={el.duration_ms}
+                    explicit={el.explicit}
+                    id={el.id}
+                    uri={el.uri}
+                    name={el.name}
+                    listen={el.preview_url}
+                    index={index}
+                    tempo={store.tracksAudioData[index].tempo}
+                    selectedTracks={store.selectedTrackURIs}
+                    key={index}
+                />
+            })
+        }
+    }
 
     return (
-        <div>
-            {store.tracks && store.tracks.map((el, index) => {
-                return <Track data={el} key={index}/>
-            })}
+        <div className="section-styling flex flex-col">
+            <div className="flex flex-col items-center">
+                <h1 className="text-white text-lg sm:text-2xl mb-5">Filter songs by BPM(Beats Per Minute)</h1>
+                <label className="text-white max-w-xs mb-5">
+                    <input
+                        className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
+                        type="text"
+                        onChange={(e) => filterHandler(e.target.value)}
+                        placeholder="Enter numeric value"/>
+                </label>
+                <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select songs to add by clicking on them</p>
+            </div>
+            <div className="grid grid-flow-col [&>*]:text-sm px-0 sm:px-[25px] auto-cols-mobileTrackLegend sm:auto-cols-track text-white border-b border-neutral-500 pb-5 mt-10">
+                <p>#</p>
+                <p>Song</p>
+                <p>Preview</p>
+                <p className="hidden sm:block">Added</p>
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <path id="Vector" d="M12 7V12H17M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </g>
+                </svg>
+            </div>
+            <div className="flex flex-col h-[800px] overflow-y-scroll mt-5">
+                {items()}
+            </div>
         </div>
     );
 }
