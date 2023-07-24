@@ -12,7 +12,8 @@ export const spotifySlice = createSlice({
         searchResult: [],
         recentSearches: [],
         additionalSearches: [],
-        artistAlbums: []
+        artistAlbums: [],
+        selectedTrackURIs: []
     }, reducers: {
         updateError: (state, action) => {
             state.error = action.payload;
@@ -57,9 +58,16 @@ export const spotifySlice = createSlice({
         updateArtistAlbums: (state, action) => {
             state.artistAlbums = action.payload;
         },
+        updateSelectedTrackURIs: (state, action) => {
+            if (state.selectedTrackURIs.filter(item => item === action.payload).length === 1) {
+                state.selectedTrackURIs = state.selectedTrackURIs.filter(item => !item.includes(action.payload))
+            } else {
+                state.selectedTrackURIs.push(action.payload)
+            }
+        },
     }
 });
 
-export const {updateArtistAlbums, updateTracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
+export const {updateSelectedTrackURIs, updateArtistAlbums, updateTracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
 
 export default spotifySlice.reducer;

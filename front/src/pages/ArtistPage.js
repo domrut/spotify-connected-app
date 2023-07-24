@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import http from "../plugins/http";
-import {updateError, updateArtistAlbums} from "../features/spotifyStore";
+import {
+    updateError,
+    updateArtistAlbums,
+    updateTracks,
+    updateTrackURIs,
+    updateTracksAudioData
+} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import Album from "../components/searchComps/searchResult/Album";
-import Loader from "../components/Loader";
+import Loader from "../plugins/Loader";
 import MainArtistHeader from "../components/MainArtistHeader";
 
 function ArtistPage({store}) {

@@ -6,9 +6,9 @@ import Artist from "./searchComps/searchResult/Artist";
 function MainArtistHeader({relatedArtists, image, name, genres, followers, external_urls}) {
     return (
         <>
-            <div className="text-white flex">
-                <div className="section-styling mr-2 flex-3">
-                    <img className="w-[300px] h-[300px] m-auto rounded-lg" src={image[0].url} alt={name}/>
+            <div className="text-white flex flex-col 1.5md:flex-row">
+                <div className="section-styling mb-2 1.5md:mb-0 1.5md:mr-2 flex-2">
+                    <img className="w-[200px] sm:w-[300px] m-auto rounded-lg" src={image[0].url} alt={name}/>
                     <div className="mt-10">
                         <p className="text-2xl mb-5">{name}</p>
                         <div className="mb-5">
@@ -31,9 +31,9 @@ function MainArtistHeader({relatedArtists, image, name, genres, followers, exter
                         </div>
                     </div>
                 </div>
-                <div className="section-styling flex flex-5">
+                <div className="section-styling flex flex-4 flex-col">
                     <p className="text-2xl text-center mb-2">Related artists</p>
-                    <div className="flex flex-wrap justify-center">
+                    <div className="flex max-w-[720px] m-auto flex-wrap justify-center">
                         {relatedArtists.artists.slice(0, 5).map((el, index) => {
                             return <Artist
                                 key={index}
@@ -42,6 +42,7 @@ function MainArtistHeader({relatedArtists, image, name, genres, followers, exter
                                 image={el.images}
                                 genres={el.genres.slice(0, 2)}
                                 followers={el.followers.total}
+                                isInArtistPage
                             />
                         })}
                     </div>

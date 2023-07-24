@@ -8,6 +8,12 @@
     .section-styling {
         @apply rounded-md bg-sectionColor p-5
     }
+    .track-styling {
+        @apply rounded-md p-5
+    }
+    .track-styling:hover {
+        box-shadow: 0 0 0 2px white;
+    }
     .top-artist-image {
         width: 120px;
         height: 120px;
@@ -51,7 +57,7 @@ body {
 }
 
 .btn-nav {
-    @apply p-1 sm:w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-sm sm:text-base;
+    @apply p-1 w-28 rounded-full sm:first:mr-2 text-center font-semibold tracking-wider bg-transparent border-2 border-white text-white text-sm sm:text-base;
 }
 
 .btn-nav:hover {

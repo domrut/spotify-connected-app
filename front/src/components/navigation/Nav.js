@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Menu, MobileMenu, Modal} from "../styled/Header.styled";
+import {Menu, MobileMenu, Modal} from "../../styled/Header.styled";
 import Hamburger from "./Hamburger";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
@@ -13,7 +13,7 @@ function Nav({store}) {
     }, [])
 
     return (
-        <nav className="flex justify-between py-4 items-center section-styling my-2">
+        <nav className="flex justify-between py-4 items-center section-styling mb-2">
             <div className="w-10 h-10">
                 <NavLink to="/">
                     <svg className="fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -1,10 +1,20 @@
 import React from 'react';
 import {useNavigate} from "react-router";
+import {updateTracks, updateTracksAudioData, updateTrackURIs} from "../../../features/spotifyStore";
+import {useDispatch} from "react-redux";
 
 function Playlist({name, id, owner, image, trackTotal}) {
     const nav = useNavigate();
+    const dispatch = useDispatch();
+    const clearStoreAndNavigate = (id) => {
+        dispatch(updateTracks([]))
+        dispatch(updateTrackURIs([]))
+        dispatch(updateTracksAudioData([]))
+        nav(`/playlists/${id}/tracks`)
+    }
+
     return (
-        <div onClick={() => nav(`/playlists/${id}/tracks`)}
+        <div onClick={() => clearStoreAndNavigate(id)}
             className="text-white cursor-pointer relative flex xs:inline w-[90%] xs:w-[160px] sm:w-[220px] h-[60px] 2xs:h-[100px] xs:h-[260px] sm:h-[300px] p-0 xs:p-3 sm:p-6 bg-neutral-900 hover:bg-neutral-800 m-2 mb-4 2xs:mb-0 rounded-lg">
             {image.length !== 0 &&
                 <img

@@ -1,11 +1,11 @@
 import React from 'react';
 import {useNavigate} from "react-router";
 import followerFormatter from "../../../plugins/followerFormatter"
-function Artist({name, id, image, genres, followers}) {
+function Artist({name, id, image, genres, followers, isInArtistPage}) {
     const nav = useNavigate();
     return (
         <div onClick={() => nav(`/artists/${id}/albums`)}
-             className="text-white cursor-pointer relative flex xs:inline w-[90%] xs:w-[160px] sm:w-[220px] h-[60px] 2xs:h-[100px] xs:h-[260px] sm:h-[300px] p-0 xs:p-3 sm:p-6 bg-neutral-900 hover:bg-neutral-800 m-2 mb-4 2xs:mb-0 rounded-lg">
+             className={`text-white cursor-pointer relative flex xs:inline w-[90%] ${isInArtistPage && ""} xs:w-[160px] sm:w-[220px] h-[60px] 2xs:h-[100px] xs:h-[260px] sm:h-[300px] p-0 xs:p-3 sm:p-6 bg-neutral-900 hover:bg-neutral-800 m-2 mb-4 2xs:mb-0 rounded-lg`}>
             {image.length !== 0 ?
                 <img
                     className="album-card-image min-w-[60px] 2xs:min-w-[100px] 2xs:h-[100px] 2xs:w-[100px] xs:h-[150px] xs:w-[150px] sm:m-auto rounded-md"

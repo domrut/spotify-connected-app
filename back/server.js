@@ -106,3 +106,8 @@ app.post("/getRelatedArtists", async (req, res) => {
     const data = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}/related-artists`, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })
+app.post("/getAlbumOrPlaylist", async (req, res) => {
+    const {url, token} = req.body;
+    const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
