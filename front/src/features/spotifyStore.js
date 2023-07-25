@@ -5,6 +5,7 @@ export const spotifySlice = createSlice({
     initialState: {
         error: {},
         isLoggedIn: false,
+        currentUser: {},
         playlists: [],
         tracks: [],
         trackURIs: [],
@@ -18,16 +19,21 @@ export const spotifySlice = createSlice({
         updateError: (state, action) => {
             state.error = action.payload;
         },
+        updateCurrentUser: (state, action) => {
+            state.currentUser = action.payload;
+        },
         updatePlaylists: (state, action) => {
             state.playlists = action.payload;
         },
         updateTracks: (state, action) => {
+            state.tracksAudioData = [];
             state.tracks = action.payload;
         },
         updateTrackURIs: (state, action) => {
             state.trackURIs = action.payload;
         },
         updateTracksAudioData: (state, action) => {
+            // state.tracksAudioData.push(...action.payload)
             state.tracksAudioData = action.payload;
         },
         updateAuth: (state, action) => {
@@ -61,13 +67,37 @@ export const spotifySlice = createSlice({
         updateSelectedTrackURIs: (state, action) => {
             if (state.selectedTrackURIs.filter(item => item === action.payload).length === 1) {
                 state.selectedTrackURIs = state.selectedTrackURIs.filter(item => !item.includes(action.payload))
+            } else if (action.payload.length === 0) {
+                state.selectedTrackURIs = []
             } else {
                 state.selectedTrackURIs.push(action.payload)
             }
         },
+        // updateSelectedTrackURIsAll: (state, action) => {
+        //     state.selectedTrackURIs.push([...action.payload])
+        //     // if (state.selectedTrackURIs.filter(item => item === action.payload).length === 1) {
+        //     //     state.selectedTrackURIs = state.selectedTrackURIs.filter(item => !item.includes(action.payload))
+        //     // } else {
+        //     //     state.selectedTrackURIs.push(action.payload)
+        //     // }
+        // },
     }
 });
 
-export const {updateSelectedTrackURIs, updateArtistAlbums, updateTracksAudioData, updateTrackURIs, addSearchResults,updateRecentSearches, updateSearchResults,updateAuth, updateError, updateTracks,updatePlaylists} = spotifySlice.actions;
+export const {
+    updateSelectedTrackURIsAll,
+    updateCurrentUser,
+    updateSelectedTrackURIs,
+    updateArtistAlbums,
+    updateTracksAudioData,
+    updateTrackURIs,
+    addSearchResults,
+    updateRecentSearches,
+    updateSearchResults,
+    updateAuth,
+    updateError,
+    updateTracks,
+    updatePlaylists
+} = spotifySlice.actions;
 
 export default spotifySlice.reducer;

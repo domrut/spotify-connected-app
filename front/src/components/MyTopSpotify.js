@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import http from "../plugins/http";
 import Loader from "../plugins/Loader";
 import {useNavigate} from "react-router";
+import CollapseCaret from "../svgs/collapseCaret";
 
 function MyTopSpotify() {
 
@@ -29,9 +30,7 @@ function MyTopSpotify() {
         <div className="flex flex-3 flex-col justify-between section-styling">
             <p className="text-white font-bold text-xl whitespace-normal text-center my-6">
                 My top artists
-                <svg onClick={hideArtistsHandler} className={`fill-white w-8 h-8 inline md:hidden ${isShown ? "rotate-180" : ""}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="down-arrow">
-                    <path d="M17,9.17a1,1,0,0,0-1.41,0L12,12.71,8.46,9.17a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42l4.24,4.24a1,1,0,0,0,1.42,0L17,10.59A1,1,0,0,0,17,9.17Z"></path>
-                </svg>
+                <CollapseCaret hideArtistsHandler={hideArtistsHandler} isShown={isShown}/>
             </p>
             <div className={`flex-wrap overflow-hidden transition-all duration-700 md:h-auto flex ${isShown ? "h-[0px]" : "h-[1120px] xs:h-[670px] sm:h-[445px] md:h-auto"}`}>
                 {loading && <Loader/>}

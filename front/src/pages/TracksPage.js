@@ -59,7 +59,7 @@ function TracksPage({store}) {
             {isLoading ? <Loader/> :
                 <>
                     <MainTracksHeader type={params.type} data={typeInfo}/>
-                    <Tracks store={store} type={params.type}/>
+                    <Tracks store={store} type={params.type} totalTracks={typeInfo}/>
                 </>
             }
         </div>

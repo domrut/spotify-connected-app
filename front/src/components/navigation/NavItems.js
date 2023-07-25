@@ -13,6 +13,9 @@ function NavItems({store}) {
                     <NavLink className="btn-nav" to="/my-library">
                         My Library
                     </NavLink>
+                    <NavLink className="btn-nav sm:ml-2" to="/selectedSongs">
+                        Selected
+                    </NavLink>
                 </>
             }
             <Auth store={store}/>

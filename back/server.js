@@ -21,7 +21,7 @@ app.get('/login', (req, res) => {
     let auth_query_parameters = new URLSearchParams({
         response_type: "code",
         client_id: CLIENT_ID,
-        scope: "user-library-read, user-top-read, playlist-read-private",
+        scope: "user-library-read, user-read-email, user-read-private, user-top-read, playlist-read-private, playlist-modify-private, playlist-modify-public",
         redirect_uri: REDIRECT_URI
     })
     res.redirect("https://accounts.spotify.com/authorize?" + auth_query_parameters.toString())
@@ -54,10 +54,27 @@ const spotifyRequest = async (url, token) => {
     })
     return await response.json();
 }
+const spotifyPostRequest = async (url, data, token) => {
+    const response = await fetch(`${url}`, {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    return await response.json();
+}
 app.post("/getMyPlaylists", async (req, res) => {
     const {token} = req.body;
     const data = await spotifyRequest("https://api.spotify.com/v1/me/playlists", token)
-    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+    const dataUser = await spotifyRequest(`https://api.spotify.com/v1/me`, token);
+    (data.error || dataUser.error) ? res.send({
+        error: {
+            status: data.error.status,
+            message: data.error.message
+        }
+    }) : res.send({data, user: dataUser});
 })
 app.post("/getMyTopArtists", async (req, res) => {
     const {token} = req.body;
@@ -94,7 +111,12 @@ app.post("/getArtistAlbums", async (req, res) => {
     const {id, token} = req.body;
     const data = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}/albums?include_groups=album`, token);
     const dataArtist = await spotifyRequest(`https://api.spotify.com/v1/artists/${id}`, token);
-    (data.error || dataArtist.error) ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data, artist: dataArtist});
+    (data.error || dataArtist.error) ? res.send({
+        error: {
+            status: data.error.status,
+            message: data.error.message
+        }
+    }) : res.send({data, artist: dataArtist});
 })
 app.post("/getArtist", async (req, res) => {
     const {id, token} = req.body;
@@ -109,5 +131,20 @@ app.post("/getRelatedArtists", async (req, res) => {
 app.post("/getAlbumOrPlaylist", async (req, res) => {
     const {url, token} = req.body;
     const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/createPlaylist", async (req, res) => {
+    const {id, token} = req.body;
+    const data = await spotifyPostRequest(`https://api.spotify.com/v1/users/${id}/playlists`, req.body.data, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/getTracks", async (req, res) => {
+    const {url, token} = req.body;
+    const data = await spotifyRequest(url, token);
+    data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
+})
+app.post("/addItemsToPlaylist", async (req, res) => {
+    const {id, url, token} = req.body;
+    const data = await spotifyPostRequest(url, req.body.data, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })

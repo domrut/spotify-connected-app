@@ -15,7 +15,7 @@ function MainTracksHeader({data, type}) {
                 itemDuration={fullDuration}
                 image={data.images}
                 name={data.name}
-                tracks={data.tracks.items.length}
+                tracks={data.tracks.total}
                 type={data.type}
             />
         }
