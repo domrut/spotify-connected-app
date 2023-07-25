@@ -6,7 +6,7 @@ React.js, Node.js, React Redux, React Router, Styled Components, Tailwind
 
 Application allows the client to connect and authenticate with his Spotify account, search for albums/artists/playlists. Create playlists, allows to filter the songs from albums/playlists by BPM(Beats per minute) and create new playlists from the filtered/selected songs.
 
-#How to install
+# How to install
 
 
 Download files to any folder
