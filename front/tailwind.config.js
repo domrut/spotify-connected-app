@@ -12,7 +12,7 @@ module.exports = {
       gridAutoColumns: {
         'track': '5% 50% 20% 20% 5%',
         'mobileTrack': '10% 65% 15% 10%',
-        'mobileTrackLegend': '10% 60% 18% 10%',
+        'mobileTrackLegend': '10% 50% 25% 15%',
       },
       transitionProperty: {
         height: 'max-height'
