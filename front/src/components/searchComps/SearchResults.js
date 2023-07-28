@@ -79,13 +79,13 @@ function SearchResults({store}) {
 
     return (
         <>
-            <label className="flex m-auto text-white max-w-xs mb-5">
-                <input
-                    className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
-                    type="text"
-                    onChange={(e) => filterHandler(e.target.value)}
-                    placeholder="Filter by name"/>
-            </label>
+                <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
+                    <input
+                        className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
+                        type="text"
+                        onChange={(e) => filterHandler(e.target.value)}
+                        placeholder="Filter by name"/>
+                </label>
             <div className="flex-wrap block 2xs:flex h-[800px] content-start justify-center max-h-[800px] overflow-y-scroll">
                 {item(Object.keys(store.searchResult)[0])}
                 {isLoading && <Loader/>}

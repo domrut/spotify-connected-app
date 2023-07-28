@@ -18,7 +18,8 @@ function CreatePlaylistForm({inputs, createPlaylistHandler, checkboxHandle}) {
                 rows="4" cols="30" id="description" name="description" placeholder="Playlist description"
                 ref={inputs.description}/>
             <span>
-                            <input className="checked:accent-green-700" type="checkbox" id="checkbox" name="checkbox" onChange={checkboxHandle}/>
+                            <input className="checked:accent-green-700" type="checkbox" id="checkbox" name="checkbox"
+                                   onChange={checkboxHandle}/>
                             <label htmlFor="checkbox">
                                 <span className="text-white ml-2">Make playlist private</span>
                             </label>

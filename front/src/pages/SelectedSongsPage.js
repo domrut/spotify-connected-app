@@ -1,18 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
 import http from "../plugins/http";
 import {updateError, updateSelectedTrackURIs} from "../features/spotifyStore";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Loader from "../plugins/Loader";
 import Track from "../components/searchComps/searchResult/Track";
 import TracksLegend from "../components/TracksLegend";
+import Modal from "../components/Modal";
+import {updateModalMenu} from "../features/hamburgerMenuStore";
 
 function SelectedSongsPage({store}) {
 
     const dispatch = useDispatch();
     const [selectedSongs, setSelectedSongs] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const [selectedPlaylist, setSelectedPlaylist] = useState(store.playlists[0].id);
+    const modalStore =  useSelector(store => store.hamburgerMenuStore)
 
     useEffect(() => {
         let trackArray = [];
@@ -39,74 +40,49 @@ function SelectedSongsPage({store}) {
             // trackArray.length === selectedSongs.length && setLoading(false);
             setTimeout(() => {
                 setLoading(false);
-            }, 1500)
+            }, 1000)
         }
         fetchInChunks();
     }, [])
 
-    const addToPlaylist = () => {
-        for (let i = 0; i < store.selectedTrackURIs.length; i += 100) {
-            const chunk = [...store.selectedTrackURIs].slice(i, i + 100);
-            const fetchData = async () => {
-                const res = await http.post("addItemsToPlaylist",
-                    {
-                        url: `https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks?uris=${chunk.join(",")}`,
-                        token: sessionStorage.getItem("token")
-                    }
-                );
-                if (res.error) {
-                    dispatch(updateError({code: res.error.status, message: res.error.message}))
-                } else {
-                    return res.data
-                }
-            }
-            fetchData().then(dispatch(updateSelectedTrackURIs([])));
-        }
-    }
-
     return (
         <div className="section-styling">
+            {modalStore.modalOpen && <Modal store={store} selectedSongs={selectedSongs} />}
             {store.selectedTrackURIs.length !== 0 ?
                 <>
                     {loading ? <Loader/> :
                         <>
-                            <div>
-                                <select onChange={event => setSelectedPlaylist(event.target.value)} name="playlists"
-                                        id="playlists">
-                                    {store.playlists.map((el, index) => {
-                                        return <option key={index} value={el.id}>{el.name}</option>
+                                <div className="flex flex-col items-center">
+                                    <h1 className="text-white text-center text-lg sm:text-2xl mb-5">Selected songs</h1>
+                                    <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select/remove songs to add by clicking on them</p>
+                                    <button onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-5 font-semibold tracking-wide w-max hover:bg-green-500">Select Playlist</button>
+                                </div>
+                            <div className="max-w-[1300px] w-full m-auto">
+                                <TracksLegend/>
+                                <div className="h-[800px] overflow-y-scroll">
+                                    {(selectedSongs.length !== 0) && selectedSongs.map((el, index) => {
+                                        return <Track
+                                            artists={el.artists}
+                                            duration={el.duration_ms}
+                                            explicit={el.explicit}
+                                            id={el.id}
+                                            uri={el.uri}
+                                            name={el.name}
+                                            listen={el.preview_url}
+                                            added={new Date().toISOString().split('T')[0]}
+                                            index={index}
+                                            selectedTracks={store.selectedTrackURIs}
+                                            key={index}
+                                        />
                                     })}
-                                </select>
-                                <button onClick={addToPlaylist}></button>
+                                </div>
                             </div>
-                            <div className="flex flex-col">
-                                <h1 className="text-white text-center text-lg sm:text-2xl mb-5">Selected songs</h1>
-                                <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select/remove
-                                    songs to add by
-                                    clicking on them</p>
-                            </div>
-                            <TracksLegend/>
-                            <div className="h-[800px] overflow-y-scroll">
-                                {(selectedSongs.length !== 0) && selectedSongs.map((el, index) => {
-                                    return <Track
-                                        artists={el.artists}
-                                        duration={el.duration_ms}
-                                        explicit={el.explicit}
-                                        id={el.id}
-                                        uri={el.uri}
-                                        name={el.name}
-                                        listen={el.preview_url}
-                                        added={new Date().toISOString().split('T')[0]}
-                                        index={index}
-                                        selectedTracks={store.selectedTrackURIs}
-                                        key={index}
-                                    />
-                                })}
-                            </div>
-                            <button onClick={addToPlaylist}>Add to play list</button>
                         </>
                     }
-                </> : <p className="text-center text-white text-2xl">No songs selected yet</p>
+                </> :
+                <div className="h-[1081px]">
+                    <p className="text-center text-white text-2xl mt-20">No songs selected yet</p>
+                </div>
             }
         </div>
     );

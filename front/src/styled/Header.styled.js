@@ -5,7 +5,9 @@ export const HamburgerStyled = styled.div`
   height: 2rem;
   justify-content: space-around;
   flex-flow: column nowrap;
-  z-index: 10;
+  position: ${({isOpen}) => isOpen && 'fixed'};
+  right: ${({isOpen}) => isOpen && '27px'};
+  z-index: 32;
   & > div {
     width: 2rem;
     height: 0.25rem;
@@ -36,7 +38,6 @@ export const MobileMenu = styled.div`
 `;
 export const Menu = styled.div`
   align-self: center;
-  z-index: 1;
 `;
 export const Modal = styled.div`
   height: 100%;
@@ -45,7 +46,7 @@ export const Modal = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 32;
   transition: all 0.3s linear;
   transform: ${({isOpen}) => isOpen ? 'translateX(0%)' : 'translateX(100%)'};
   @media screen and (max-width: 230px) {

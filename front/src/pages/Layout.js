@@ -17,7 +17,7 @@ function Layout({store}) {
             <Nav store={store}/>
             <main className="m-auto pb-[3rem]">
                 <Routes>
-                    {!sessionStorage.getItem("token") && <Route path="/" element={<Home/>}/>}
+                    {!sessionStorage.getItem("token") && <Route path="*" element={<Home/>}/>}
                     {sessionStorage.getItem("token") &&
                         <>
                             <Route path="/search" element={<SearchPage store={store}/>}/>
@@ -26,9 +26,9 @@ function Layout({store}) {
                             <Route path="/my-library/" element={<Playlists store={store}/>}/>
                             <Route path="/selectedSongs" element={<SelectedSongsPage store={store}/>}/>
                             <Route path="/:type/:id/tracks" element={<TracksPage store={store}/>}/>
+                            <Route path="*" element={<Error404/>}/>
                         </>
                     }
-                    <Route path="*" element={<Error404/>}/>
                 </Routes>
             </main>
             <Footer/>

@@ -25,6 +25,7 @@ function Playlists({store}) {
         setRefresh(false);
         setIsLoading(true);
         const getMyPlaylists = async () => {
+            console.log("fetch?")
             const res = await http.post("getMyPlaylists", {token: sessionStorage.getItem("token")});
             if (res.error) {
                 dispatch(updateError({code: res.error.status, message: res.error.message}))
@@ -33,17 +34,17 @@ function Playlists({store}) {
                 dispatch(updateCurrentUser(res.user))
             }
         }
-        getMyPlaylists().catch(console.error)
-        setIsLoading(false)
+        getMyPlaylists().then(() => setIsLoading(false))
     }, [refresh])
 
     return (
         <>
-            {isLoading ? <Loader/> :
-                <>
-                    <PlaylistAdd user={store.currentUser.id} setRefresh={setRefresh} refresh={refresh}/>
-                    <div className="flex flex-wrap justify-center section-styling">
-                        {store.playlists && store.playlists.map((el, index) => {
+            <PlaylistAdd user={store.currentUser.id} setRefresh={setRefresh} refresh={refresh}/>
+            <div className="flex flex-wrap justify-center section-styling">
+                {isLoading ? <Loader/> :
+                    <>
+                        <p className="text-white text-2xl w-full text-center my-10">My playlists</p>
+                        {store.playlists ? store.playlists.map((el, index) => {
                             return <Playlist
                                 key={index}
                                 name={el.name}
@@ -52,11 +53,10 @@ function Playlists({store}) {
                                 image={el.images}
                                 trackTotal={el.tracks.total}
                             />
-                        })}
-                    </div>
-                </>
-
-            }
+                        }) : null}
+                    </>
+                }
+            </div>
         </>
     );
 }

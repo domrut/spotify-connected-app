@@ -36,7 +36,7 @@ function MainTracksHeader({data, type}) {
     }
 
     return (
-        <div className="section-styling mb-2 flex flex-col xs:flex-row text-white">
+        <div className="section-styling mb-2 flex pl-12 flex-col xs:flex-row text-white">
             {data.length !== 0 && item(type)}
         </div>
     );

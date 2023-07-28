@@ -51,7 +51,6 @@ function Tracks({store, type, totalTracks}) {
             setFilteredArrayData(fetchAudioData.data.audio_features)
             setFilteredArray(res.data.items)
         }
-        console.log("aaa")
         {store.tracks.length >= 100 && fetchMoreTracks().catch(console.error)}
     }, [page])
 
@@ -72,7 +71,7 @@ function Tracks({store, type, totalTracks}) {
                     listen={el.track.preview_url}
                     index={index}
                     added={el.added_at}
-                    tempo={filteredArrayData[index].tempo}
+                    tempo={filteredArrayData[index] !== null ? filteredArrayData[index].tempo : 0}
                     selectedTracks={store.selectedTrackURIs}
                     key={index}
                 />
@@ -89,7 +88,8 @@ function Tracks({store, type, totalTracks}) {
                     name={el.name}
                     listen={el.preview_url}
                     index={index}
-                    tempo={filteredArrayData[index].tempo}
+                    added={totalTracks.release_date}
+                    tempo={filteredArrayData[index] !== null ? filteredArrayData[index].tempo : 0}
                     selectedTracks={store.selectedTrackURIs}
                     key={index}
                 />
@@ -100,9 +100,9 @@ function Tracks({store, type, totalTracks}) {
     return (
         <div className="section-styling flex flex-col">
             <div className="flex flex-col items-center">
-                <h1 className="text-white text-lg sm:text-2xl mb-5">Filter songs by BPM(Beats Per Minute)</h1>
+                <h1 className="text-white text-lg sm:text-2xl my-10">Filter songs by BPM (Beats Per Minute)</h1>
                 {/*<button onClick={addAllSongs}>Add all songs</button>*/}
-                <label className="text-white max-w-xs mb-5">
+                <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
                     <input
                         className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
                         type="text"

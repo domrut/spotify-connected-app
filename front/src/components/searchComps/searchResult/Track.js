@@ -47,13 +47,13 @@ function Track({artists, duration, explicit, uri, id, name, listen, index, selec
                  onClick={() => selectTrack(uri)}>
             </div>
             <div className="flex flex-col truncate">
-                <p className="flex whitespace-normal text-xs sm:text-base">{name}
+                <p className="flex whitespace-normal text-sm font-semibold tracking-wide sm:text-base">{name}
                         {explicit ? <ExplicitLogo />: ""}
                 </p>
                 <div>
                     {artists && artists.map((el, index) => {
                         return <Link
-                            className="text-2xs sm:text-xs inline relative z-10 break-words hover:text-neutral-200"
+                            className="text-xs sm:text-sm inline relative z-10 break-words hover:underline focus:underline"
                             key={index}
                             to={`/artists/${el.id}/albums`}>
                             {el.name}

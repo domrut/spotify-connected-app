@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       gridAutoColumns: {
         'track': '5% 50% 20% 20% 5%',
-        'mobileTrack': '10% 65% 15% 10%',
+        'mobileTrack': '10% 55% 25% 10%',
         'mobileTrackLegend': '10% 50% 25% 15%',
       },
       transitionProperty: {

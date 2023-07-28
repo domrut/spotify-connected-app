@@ -3,6 +3,7 @@ import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {updateAuth} from "../../features/spotifyStore";
 import {Button} from "../../styled/Button.styled";
+import Logout from "../../svgs/logout";
 
 function Auth() {
     const nav = useNavigate();
@@ -26,9 +27,9 @@ function Auth() {
     }
 
     return (
-        <div className="mt-20 sm:ml-20 sm:mt-0">
+        <div className="mt-20 sm:ml-20 sm:mt-0 items-center">
             {sessionStorage.getItem("token") ?
-                <Button className="btn-nav" onClick={logoutHandler}>Logout</Button> :
+                <Logout logoutHandler={logoutHandler}/> :
                 <Button className="btn-nav" onClick={loginHandler}>Login</Button>}
         </div>
     );

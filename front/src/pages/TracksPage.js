@@ -52,7 +52,7 @@ function TracksPage({store}) {
             setIsLoading(false);
         }
         fetchTracks();
-    }, [params.id, params.type])
+    }, [params.id])
 
     return (
         <div>
