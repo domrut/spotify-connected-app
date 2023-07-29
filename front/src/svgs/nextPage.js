@@ -2,7 +2,7 @@ import React from 'react';
 
 function NextPage() {
     return (
-        <svg fill="#fff" height="40px" width="40px" version="1.1" id="Layer_1"
+        <svg fill="#fff" height="30px" width="30px" version="1.1" id="Layer_1"
              xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 512.094 512.094">
             <g>

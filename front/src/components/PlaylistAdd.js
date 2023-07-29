@@ -17,6 +17,7 @@ function PlaylistAdd({user, setRefresh, refresh}) {
     }
     const createPlaylistHandler = async (e) => {
         e.preventDefault();
+        setError("")
         if (inputs.name.current.value === "") return setError("Enter your full name");
         const res = await http.post("createPlaylist",
             {
@@ -41,7 +42,7 @@ function PlaylistAdd({user, setRefresh, refresh}) {
             {createdSuccesfully && <InfoModal />}
             {user &&
                 <div className="section-styling mb-2">
-                    <p className="text-white whitespace-normal my-5 text-2xl text-center">Create new playlist</p>
+                    <p className="text-white whitespace-normal font-bold tracking-wide my-5 text-2xl text-center">Create new playlist</p>
                     {error && <p className="text-red-800 whitespace-normal mt-2 text-base text-center">{error}</p>}
                     <CreatePlaylistForm
                         inputs={inputs}

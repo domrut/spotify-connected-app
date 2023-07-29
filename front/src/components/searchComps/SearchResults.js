@@ -79,7 +79,7 @@ function SearchResults({store}) {
 
     return (
         <>
-                <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
+                <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-20">
                     <input
                         className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
                         type="text"

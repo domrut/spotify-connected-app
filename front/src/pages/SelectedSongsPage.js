@@ -53,7 +53,7 @@ function SelectedSongsPage({store}) {
                     {loading ? <Loader/> :
                         <>
                                 <div className="flex flex-col items-center">
-                                    <h1 className="text-white text-center text-lg sm:text-2xl mb-5">Selected songs</h1>
+                                    <p className="text-white font-bold tracking-wide text-center text-lg sm:text-2xl mb-5">Selected songs</p>
                                     <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select/remove songs to add by clicking on them</p>
                                     <button onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-5 font-semibold tracking-wide w-max hover:bg-green-500">Select Playlist</button>
                                 </div>
@@ -81,7 +81,7 @@ function SelectedSongsPage({store}) {
                     }
                 </> :
                 <div className="h-[1081px]">
-                    <p className="text-center text-white text-2xl mt-20">No songs selected yet</p>
+                    <p className="text-center font-bold tracking-wide text-white text-2xl mt-20">No songs selected yet</p>
                 </div>
             }
         </div>

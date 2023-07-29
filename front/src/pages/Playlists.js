@@ -41,21 +41,25 @@ function Playlists({store}) {
         <>
             <PlaylistAdd user={store.currentUser.id} setRefresh={setRefresh} refresh={refresh}/>
             <div className="flex flex-wrap justify-center section-styling">
-                {isLoading ? <Loader/> :
-                    <>
-                        <p className="text-white text-2xl w-full text-center my-10">My playlists</p>
-                        {store.playlists ? store.playlists.map((el, index) => {
-                            return <Playlist
-                                key={index}
-                                name={el.name}
-                                owner={el.owner.display_name}
-                                id={el.id}
-                                image={el.images}
-                                trackTotal={el.tracks.total}
-                            />
-                        }) : null}
-                    </>
-                }
+                <div
+                    className="flex-wrap block 2xs:flex h-[800px] content-start overflow-x-hidden justify-center max-h-[800px] overflow-y-scroll">
+                    {isLoading ? <Loader/> :
+                        <>
+                            <p className="text-white text-2xl font-bold tracking-wide w-full text-center my-10">My
+                                playlists</p>
+                            {store.playlists ? store.playlists.map((el, index) => {
+                                return <Playlist
+                                    key={index}
+                                    name={el.name}
+                                    owner={el.owner.display_name}
+                                    id={el.id}
+                                    image={el.images}
+                                    trackTotal={el.tracks.total}
+                                />
+                            }) : null}
+                        </>
+                    }
+                </div>
             </div>
         </>
     );

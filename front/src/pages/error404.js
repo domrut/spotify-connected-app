@@ -12,7 +12,7 @@ function Error404() {
                         <path d="M7 5.969L5.599 4.568a.29.29 0 0 0-.413.004l-.614.614a.294.294 0 0 0-.004.413L5.968 7l-1.4 1.401a.29.29 0 0 0 .004.413l.614.614c.113.114.3.117.413.004L7 8.032l1.401 1.4a.29.29 0 0 0 .413-.004l.614-.614a.294.294 0 0 0 .004-.413L8.032 7l1.4-1.401a.29.29 0 0 0-.004-.413l-.614-.614a.294.294 0 0 0-.413-.004L7 5.968z"/>
                     </g>
                 </svg>
-                <h1 className="text-xl sm:text-[4rem] text-white my-20 tracking-wide font-bold">Page does not exist</h1>
+                <p className="text-xl sm:text-[4rem] text-white my-20 tracking-wide font-bold">Page does not exist</p>
                 <Link to="/my-library" className="text-neutral-300 p-2 sm:p-5 border-2 block max-w-[10rem] m-auto border-white rounded-full hover:bg-white hover:text-black">Go home</Link>
 
             </div>

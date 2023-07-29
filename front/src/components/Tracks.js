@@ -100,7 +100,7 @@ function Tracks({store, type, totalTracks}) {
     return (
         <div className="section-styling flex flex-col">
             <div className="flex flex-col items-center">
-                <h1 className="text-white text-lg sm:text-2xl my-10">Filter songs by BPM (Beats Per Minute)</h1>
+                <p className="text-white font-bold tracking-wide text-lg sm:text-2xl my-10">Filter songs by tempo</p>
                 {/*<button onClick={addAllSongs}>Add all songs</button>*/}
                 <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
                     <input
@@ -118,7 +118,7 @@ function Tracks({store, type, totalTracks}) {
                     {items()}
                 </div>
                 {(totalTracks.length !== 0 && store.tracks.length >= 0) && (totalTracks.tracks.total >= 100) &&
-                    <div className="w-full text-center">
+                    <div className="w-full text-center mt-5">
                         <button disabled={page === 0} className="text-white disabled:opacity-20 mr-10 mt-5 font-semibold text-base"
                                 onClick={() => setPage(prevState => prevState - 100)}><PreviousPage/>
                         </button>
