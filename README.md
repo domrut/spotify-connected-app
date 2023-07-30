@@ -21,4 +21,4 @@ Dummy testing account:
 Email: spotify.test.acc.app@gmail.com
 Pass: fortesting123
 
-P.S. The application/authentication will not work, since the `.env` file is not present, and Spotify application is in development mode.
+P.S. The application/authentication will not work, since the `.env` file is not present.
