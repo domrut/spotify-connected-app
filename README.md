@@ -25,6 +25,4 @@ Email: spotify.test.acc.app@gmail.com
 
 Pass: fortesting123
 
-URL:
-
-https://spotify-connected-app.vercel.app
+URL: https://spotify-connected-app.vercel.app
