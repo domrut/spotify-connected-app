@@ -23,4 +23,4 @@ Pass: fortesting123
 
 URL:
 
-spotify-connected-app.vercel.app
+https://spotify-connected-app.vercel.app
