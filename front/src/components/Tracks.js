@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
 import {useParams} from "react-router";
@@ -21,6 +21,7 @@ function Tracks({store, type, totalTracks}) {
     const [page, setPage] = useState(0)
     const params = useParams();
     const dispatch = useDispatch();
+    const input = useRef();
     const filterHandler = (value) => {
         const filterTempo = store.tracksAudioData.filter(item => item.tempo >= value);
         let arr;
@@ -32,6 +33,7 @@ function Tracks({store, type, totalTracks}) {
     useEffect(() => {
         const fetchMoreTracks = async (amount) => {
             let audioArray = [];
+            input.current.value = "";
             const res = await http.post("playListTracks", {
                 url: `https://api.spotify.com/v1/${params.type}/${params.id}/tracks?limit=100&offset=${page}`,
                 token: sessionStorage.getItem("token")
@@ -51,7 +53,7 @@ function Tracks({store, type, totalTracks}) {
             setFilteredArrayData(fetchAudioData.data.audio_features)
             setFilteredArray(res.data.items)
         }
-        {store.tracks.length >= 100 && fetchMoreTracks().catch(console.error)}
+        fetchMoreTracks().catch(console.error)
     }, [page])
 
     // const addAllSongs = () => {
@@ -106,6 +108,7 @@ function Tracks({store, type, totalTracks}) {
                     <input
                         className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
                         type="text"
+                        ref={input}
                         onChange={(e) => filterHandler(e.target.value)}
                         placeholder="Enter numeric value"/>
                 </label>
