@@ -32,7 +32,7 @@ function Home() {
                         songs by tempo and create your perfect playlist</h1>
                     <Link
                         className="flex items-center w-max 2xs:w-64 rounded-md p-4 border-black border-2 hover:bg-green-500 bg-green-700"
-                        to={"https://filter-tempo.onrender.com/login"}>
+                        to={"http://192.168.0.105:3002/login"}>
                         <SpotifyLogo login/>
                         Connect <span className="hidden 2xs:inline ml-1.5">your Spotify</span></Link>
                     <div

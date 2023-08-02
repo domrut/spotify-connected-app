@@ -15,9 +15,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.listen(PORT, () => {
-    console.log(`app is running on ${PORT}`)
-});
+app.listen(3002, '192.168.0.105')
 
 app.get('/login', (req, res) => {
     let auth_query_parameters = new URLSearchParams({
@@ -35,7 +33,6 @@ app.get("/callback", async (req, res) => {
         redirect_uri: REDIRECT_URI,
         grant_type: "authorization_code"
     })
-
     const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "post",
         body,
