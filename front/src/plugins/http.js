@@ -1,4 +1,4 @@
-const serverUrl = "http://192.168.0.105:3002";
+const serverUrl = "https://filter-tempo.onrender.com";
 
 export default {
     get: async (url) => {
