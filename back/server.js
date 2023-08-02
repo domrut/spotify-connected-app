@@ -9,12 +9,13 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const SERVER_URL = process.env.SERVER_URL;
+const PORT = process.env.PORT || 3002;
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.listen(3002, '192.168.0.105');
+app.listen(PORT, '192.168.0.105');
 
 
 app.get('/login', (req, res) => {
