@@ -17,4 +17,8 @@ To run the node.js server run `nodemon server` in `/back` folder
 
 To run react app type `run npm start` in `/front` folder
 
-P.S. The application/authentication will not work, since the `.env` file is not present, and Spotify application is in development mode.
+Dummy testing account:
+Email: spotify.test.acc.app@gmail.com
+Pass: fortesting123
+
+P.S. The application/authentication will not work, since the `.env` file is not present.
