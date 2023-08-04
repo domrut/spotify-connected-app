@@ -2,16 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
 import {useParams} from "react-router";
-import {
-    updateSelectedTrackURIs,
-    updateSelectedTrackURIsAll,
-    updateTracks,
-    updateTracksAudioData,
-    updateTrackURIs
-} from "../features/spotifyStore";
+import {updateTracks, updateTracksAudioData} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import TracksLegend from "./TracksLegend";
-import track from "./searchComps/searchResult/Track";
 import NextPage from "../svgs/nextPage";
 import PreviousPage from "../svgs/previousPage";
 
@@ -56,10 +49,6 @@ function Tracks({store, type, totalTracks}) {
         fetchMoreTracks().catch(console.error)
     }, [page])
 
-    // const addAllSongs = () => {
-    //     dispatch(updateSelectedTrackURIsAll(store.trackURIs.map(el => el.uri)))
-    // }
-
     const items = () => {
         if (type === "playlists") {
             return filteredArray.map((el, index) => {
@@ -103,7 +92,6 @@ function Tracks({store, type, totalTracks}) {
         <div className="section-styling flex flex-col">
             <div className="flex flex-col items-center">
                 <p className="text-white font-bold tracking-wide text-lg sm:text-2xl my-10">Filter songs by tempo</p>
-                {/*<button onClick={addAllSongs}>Add all songs</button>*/}
                 <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
                     <input
                         className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"

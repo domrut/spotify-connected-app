@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import http from "../plugins/http";
-import {updateError, updateSelectedTrackURIs} from "../features/spotifyStore";
+import {updateError} from "../features/spotifyStore";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../plugins/Loader";
 import Track from "../components/searchComps/searchResult/Track";
@@ -36,8 +36,6 @@ function SelectedSongsPage({store}) {
                 }
                 fetchData().then(res => setSelectedSongs(prevState => [...prevState, ...res.tracks]));
             }
-            console.log(trackArray.length === selectedSongs.length)
-            // trackArray.length === selectedSongs.length && setLoading(false);
             setTimeout(() => {
                 setLoading(false);
             }, 1000)

@@ -97,7 +97,6 @@ app.post("/search", async (req, res) => {
 })
 app.post("/nextPage", async (req, res) => {
     const {url, token} = req.body;
-    console.log(req.body);
     const data = await spotifyRequest(url, token);
     data.error ? res.send({error: {status: data.error.status, message: data.error.message}}) : res.send({data});
 })

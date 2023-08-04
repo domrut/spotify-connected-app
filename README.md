@@ -1,4 +1,4 @@
-﻿# spotify-connected-app
+﻿# Spotify tempo filter
 
 Tech stack used:
 

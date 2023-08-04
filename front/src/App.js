@@ -14,7 +14,6 @@ function App() {
     return (
         <>
             <Layout store={store}/>
-            {console.log(store)}
         </>
     );
 }

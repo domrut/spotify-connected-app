@@ -25,7 +25,6 @@ function Playlists({store}) {
         setRefresh(false);
         setIsLoading(true);
         const getMyPlaylists = async () => {
-            console.log("fetch?")
             const res = await http.post("getMyPlaylists", {token: sessionStorage.getItem("token")});
             if (res.error) {
                 dispatch(updateError({code: res.error.status, message: res.error.message}))
