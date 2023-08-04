@@ -3,10 +3,13 @@ import http from "../plugins/http";
 import Loader from "../plugins/Loader";
 import {useNavigate} from "react-router";
 import CollapseCaret from "../svgs/collapseCaret";
+import {updateError} from "../features/spotifyStore";
+import {useDispatch} from "react-redux";
 
 function MyTopSpotify() {
 
     const nav = useNavigate();
+    const dispatch = useDispatch();
     const [topArtists, setTopArtists] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isShown, setIsShown] = useState(false)
@@ -14,12 +17,15 @@ function MyTopSpotify() {
     useEffect(() => {
         setLoading(true);
         const request = async () => {
-            const res = await http.post("getMyTopArtists", {token: sessionStorage.getItem("token")
-            });
-            setTopArtists(res.data.items);
-            setLoading(false);
+            const res = await http.post("getMyTopArtists", {token: sessionStorage.getItem("token")});
+            if (res.error) {
+                dispatch(updateError({code: res.error.status, message: res.error.message}))
+            } else {
+                setTopArtists(res.data.items);
+                setLoading(false);
+            }
         }
-        request().catch(console.error)
+        request().catch(console.error);
     }, [])
 
     const hideArtistsHandler = () => {
@@ -28,7 +34,7 @@ function MyTopSpotify() {
 
     return (
         <div className="flex flex-3 flex-col justify-between section-styling">
-            <p className="text-white font-bold text-xl whitespace-normal text-center my-6">
+            <p className="text-white font-bold text-2xl whitespace-normal text-center my-6">
                 My top artists
                 <CollapseCaret hideArtistsHandler={hideArtistsHandler} isShown={isShown}/>
             </p>

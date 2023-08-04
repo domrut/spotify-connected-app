@@ -24,7 +24,7 @@ function Tracks({store, type, totalTracks}) {
     }
 
     useEffect(() => {
-        const fetchMoreTracks = async (amount) => {
+        const fetchMoreTracks = async () => {
             let audioArray = [];
             input.current.value = "";
             const res = await http.post("playListTracks", {
@@ -91,7 +91,12 @@ function Tracks({store, type, totalTracks}) {
     return (
         <div className="section-styling flex flex-col">
             <div className="flex flex-col items-center">
-                <p className="text-white font-bold tracking-wide text-lg sm:text-2xl my-10">Filter songs by tempo</p>
+                <p className="text-white font-bold tracking-wide text-lg sm:text-2xl my-10">Filter songs by <a className="underline ml-0.5" href="https://en.wikipedia.org/wiki/Tempo" target="_blank">tempo</a></p>
+                <div className="text-center [&>*]:my-5 text-neutral-300 max-w-3xl mb-10">
+                    <p className="whitespace-normal">Select the songs to add to the playlist by clicking on them, deselect them by clicking again.</p>
+                    <p className="whitespace-normal">You can select songs through multiple sources, they are still saved under <strong>"Selected"</strong></p>
+                    <p className="whitespace-normal">Some songs you can preview before selecting them by clicking on play button</p>
+                </div>
                 <label className="flex m-auto text-white filter_icon max-w-[15rem] mb-5">
                     <input
                         className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
@@ -100,8 +105,6 @@ function Tracks({store, type, totalTracks}) {
                         onChange={(e) => filterHandler(e.target.value)}
                         placeholder="Enter numeric value"/>
                 </label>
-                <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select songs to add by
-                    clicking on them</p>
             </div>
             <div className="max-w-[1300px] w-full m-auto">
                 <TracksLegend/>
