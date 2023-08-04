@@ -19,7 +19,7 @@ function Playlist({name, id, owner, image, trackTotal}) {
             {image.length !== 0 &&
                 <img
                     className="album-card-image 2xs:h-[100px] 2xs:w-[100px] xs:h-[150px] xs:w-[150px] sm:m-auto rounded-md"
-                    src={image[0].url} loading="lazy" alt=""/>
+                    src={image[0].url} alt=""/>
             }
             <div className="truncate flex flex-col justify-evenly pl-2 2xs:p-3 xs:p-0 sm:mt-2">
                 <div className="text-left items-center xs:px-0 pt-2 xs:pt-4">

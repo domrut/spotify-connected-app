@@ -41,14 +41,25 @@ function PlaylistAdd({user, setRefresh, refresh}) {
         <>
             {createdSuccesfully && <InfoModal />}
             {user &&
-                <div className="section-styling mb-2">
-                    <p className="text-white whitespace-normal font-bold tracking-wide my-5 text-2xl text-center">Create new playlist</p>
-                    {error && <p className="text-red-800 whitespace-normal mt-2 text-base text-center">{error}</p>}
-                    <CreatePlaylistForm
-                        inputs={inputs}
-                        createPlaylistHandler={createPlaylistHandler}
-                        checkboxHandle={checkboxHandle}
-                    />
+                <div className="flex flex-col sm:flex-row gap-x-0 sm:gap-x-2">
+                    <div className="section-styling mb-2 flex flex-col flex-3">
+                        <p className="text-white whitespace-normal font-bold mt-0 sm:mt-10 mb-5 sm:mb-20 tracking-wide text-xl sm:text-[1.75rem] text-center">
+                            Create new playlist
+                        </p>
+                        <div className="text-neutral-300 max-w-xl mx-auto">
+                            <p className="whitespace-normal text-md text-center mt-10 sm:mt-0">Playlists you have created before are here for you to add songs.</p>
+                            <p className="whitespace-normal text-md text-center my-10">If you wish to create a new playlist you can do that with this form.</p>
+                            <p className="whitespace-normal text-md text-center my-10">You need to enter the playlist name, also if you want you can enter the playlist description and make this playlist private if you wish.</p>
+                        </div>
+                    </div>
+                    <div className="section-styling mb-2 flex-3">
+                        {error && <p className="text-red-800 whitespace-normal mt-2 text-base text-center">{error}</p>}
+                        <CreatePlaylistForm
+                            inputs={inputs}
+                            createPlaylistHandler={createPlaylistHandler}
+                            checkboxHandle={checkboxHandle}
+                        />
+                    </div>
                 </div>
             }
         </>

@@ -33,7 +33,6 @@ export const spotifySlice = createSlice({
             state.trackURIs = action.payload;
         },
         updateTracksAudioData: (state, action) => {
-            // state.tracksAudioData.push(...action.payload)
             state.tracksAudioData = action.payload;
         },
         updateAuth: (state, action) => {
@@ -72,20 +71,11 @@ export const spotifySlice = createSlice({
             } else {
                 state.selectedTrackURIs.push(action.payload)
             }
-        },
-        // updateSelectedTrackURIsAll: (state, action) => {
-        //     state.selectedTrackURIs.push([...action.payload])
-        //     // if (state.selectedTrackURIs.filter(item => item === action.payload).length === 1) {
-        //     //     state.selectedTrackURIs = state.selectedTrackURIs.filter(item => !item.includes(action.payload))
-        //     // } else {
-        //     //     state.selectedTrackURIs.push(action.payload)
-        //     // }
-        // },
+        }
     }
 });
 
 export const {
-    updateSelectedTrackURIsAll,
     updateCurrentUser,
     updateSelectedTrackURIs,
     updateArtistAlbums,

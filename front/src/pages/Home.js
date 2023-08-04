@@ -19,7 +19,7 @@ function Home() {
             const trimmedToken = window.location.pathname.split("auth=loggedIn/")[1];
             sessionStorage.setItem("token", trimmedToken)
             dispatch(updateAuth(true));
-            nav("my-library")
+            nav("search")
         }
     }, [])
 
