@@ -32,9 +32,11 @@ function Search({store}) {
     }
 
     return (
-        <div className="flex-3 flex flex-col justify-between section-styling">
+        <div className="flex-3 flex flex-col section-styling">
             {error && <p className="text-red-500 font-bold py-2 text-center">{error}</p>}
-            <p className="text-white font-bold whitespace-normal text-xl text-center my-6">Find something new</p>
+            <p className="text-white font-bold whitespace-normal text-2xl text-center my-6">Find something new</p>
+            <p className="whitespace-normal text-center text-neutral-300 mb-5 max-w-md mx-auto">You can search for any
+                artist, album or playlist by entering the search query and selecting the category below</p>
             <SearchForm input={input} selectedCategory={setSelectedCategory} searchHandler={searchHandler}/>
             <div className="flex flex-col items-center mt-5 text-white min-h-[3.25rem]">
                 <p className="text-sm mb-5 sm:mb-0">Recent searches</p>

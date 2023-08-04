@@ -56,7 +56,7 @@ function TracksPage({store}) {
 
     return (
         <div>
-            {(isLoading && typeInfo.length >= 1) ? <Loader/> :
+            {isLoading ? <Loader/> :
                 <>
                     <MainTracksHeader type={params.type} data={typeInfo}/>
                     <Tracks store={store} type={params.type} totalTracks={typeInfo}/>
