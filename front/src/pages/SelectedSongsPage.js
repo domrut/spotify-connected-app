@@ -13,7 +13,7 @@ function SelectedSongsPage({store}) {
     const dispatch = useDispatch();
     const [selectedSongs, setSelectedSongs] = useState([]);
     const [loading, setLoading] = useState(false);
-    const modalStore =  useSelector(store => store.hamburgerMenuStore)
+    const modalStore = useSelector(store => store.hamburgerMenuStore);
 
     useEffect(() => {
         let trackArray = [];
@@ -45,16 +45,28 @@ function SelectedSongsPage({store}) {
 
     return (
         <div className="section-styling">
-            {modalStore.modalOpen && <Modal store={store} selectedSongs={selectedSongs} />}
+            {modalStore.modalOpen && <Modal store={store} selectedSongs={selectedSongs}/>}
             {store.selectedTrackURIs.length !== 0 ?
                 <>
                     {loading ? <Loader/> :
                         <>
-                                <div className="flex flex-col items-center">
-                                    <p className="text-white font-bold tracking-wide text-center text-lg sm:text-2xl mb-5">Selected songs</p>
-                                    <p className="text-neutral-500 whitespace-normal text-center text-sm mb-5">Select/remove songs to add by clicking on them</p>
-                                    <button onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-5 font-semibold tracking-wide w-max hover:bg-green-500">Select Playlist</button>
+                            <div className="flex flex-col items-center">
+                                <p className="text-white font-bold tracking-wide text-center text-lg sm:text-[1.75rem] mb-5">Selected
+                                    songs</p>
+                                <div className="text-center">
+                                    <p className="text-white whitespace-normal my-5">Here you can see all the songs you have
+                                        selected.</p>
+                                    <p className="text-white whitespace-normal mt-5">Select the playlist you want to add the
+                                        songs to.</p>
+                                    <small className="text-neutral-400">(Only your created playlists will be available)</small>
                                 </div>
+                                <p className="text-neutral-500 whitespace-normal text-center text-sm my-10">Select/remove
+                                    songs to add by clicking on them</p>
+                                <button onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))}
+                                        className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-5 font-semibold tracking-wide w-max hover:bg-green-500">Select
+                                    Playlist
+                                </button>
+                            </div>
                             <div className="max-w-[1300px] w-full m-auto">
                                 <TracksLegend/>
                                 <div className="h-[800px] overflow-y-scroll">
@@ -79,7 +91,8 @@ function SelectedSongsPage({store}) {
                     }
                 </> :
                 <div className="h-[1081px]">
-                    <p className="text-center font-bold tracking-wide text-white text-2xl mt-20">No songs selected yet</p>
+                    <p className="text-center font-bold tracking-wide text-white text-2xl mt-20">No songs selected
+                        yet</p>
                 </div>
             }
         </div>
