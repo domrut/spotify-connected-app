@@ -24,6 +24,7 @@ function Tracks({store, type, totalTracks}) {
     }
 
     useEffect(() => {
+        if (type === "albums") return;
         const fetchMoreTracks = async () => {
             let audioArray = [];
             input.current.value = "";
@@ -46,6 +47,7 @@ function Tracks({store, type, totalTracks}) {
             setFilteredArrayData(fetchAudioData.data.audio_features)
             setFilteredArray(res.data.items)
         }
+
         fetchMoreTracks().catch(console.error)
     }, [page])
 
