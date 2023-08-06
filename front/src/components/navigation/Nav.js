@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {Menu, MobileMenu, Modal} from "../../styled/Header.styled";
 import Hamburger from "./Hamburger";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
 import NavItems from "./NavItems";
 import NavLogo from "../../svgs/navLogo";
@@ -9,10 +9,7 @@ import Backdrop from "../Backdrop";
 
 function Nav({store}) {
     const hambStore = useSelector(store => store.hamburgerMenuStore);
-
-    useEffect(() => {
-        localStorage.getItem("token")
-    }, [])
+    const [isDark, setIsDark] = useState(true);
 
     return (
         <nav className="flex justify-between py-4 items-center section-styling mb-2">
@@ -21,13 +18,13 @@ function Nav({store}) {
                     <NavLogo/>
                 </NavLink>
             </div>
-            <Menu className="hidden sm:flex">
-                <NavItems store={store}/>
+            <Menu className="hidden sm:flex items-center">
+                <NavItems store={store} setIsDark={setIsDark} isDark={isDark}/>
             </Menu>
             <Backdrop store={hambStore}/>
             <Modal className="sm:hidden dark:bg-white" isOpen={hambStore.isOpen}>
                 <MobileMenu>
-                    <NavItems store={store}/>
+                    <NavItems store={store} setIsDark={setIsDark} isDark={isDark}/>
                 </MobileMenu>
             </Modal>
             <Hamburger/>
