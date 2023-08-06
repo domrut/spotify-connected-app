@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import ArtistPage from "./ArtistPage";
 import TracksPage from "./TracksPage";
 import SelectedSongsPage from "./SelectedSongsPage";
+import {Navigate} from "react-router";
 
 function Layout({store}) {
     return (
