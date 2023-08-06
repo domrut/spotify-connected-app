@@ -11,7 +11,7 @@ function Nav({store}) {
     const hambStore = useSelector(store => store.hamburgerMenuStore);
 
     useEffect(() => {
-        sessionStorage.getItem("token")
+        localStorage.getItem("token")
     }, [])
 
     return (
@@ -25,7 +25,7 @@ function Nav({store}) {
                 <NavItems store={store}/>
             </Menu>
             <Backdrop store={hambStore}/>
-            <Modal className="sm:hidden" isOpen={hambStore.isOpen}>
+            <Modal className="sm:hidden dark:bg-white" isOpen={hambStore.isOpen}>
                 <MobileMenu>
                     <NavItems store={store}/>
                 </MobileMenu>

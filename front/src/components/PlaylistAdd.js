@@ -27,7 +27,7 @@ function PlaylistAdd({user, setRefresh, refresh}) {
                     "description": inputs.description.current.value,
                     "public": isChecked
                 },
-                token: sessionStorage.getItem("token")
+                token: localStorage.getItem("token")
             }
         );
         res.error ? setCreatedSuccesfully(false) : setCreatedSuccesfully(true)
@@ -43,10 +43,10 @@ function PlaylistAdd({user, setRefresh, refresh}) {
             {user &&
                 <div className="flex flex-col sm:flex-row gap-x-0 sm:gap-x-2">
                     <div className="section-styling mb-2 flex flex-col flex-3">
-                        <p className="text-white whitespace-normal font-bold mt-0 sm:mt-10 mb-5 sm:mb-20 tracking-wide text-xl sm:text-[1.75rem] text-center">
+                        <p className="text-white dark:text-black whitespace-normal font-bold mt-0 sm:mt-10 mb-5 sm:mb-20 tracking-wide text-xl sm:text-[1.75rem] text-center">
                             Create new playlist
                         </p>
-                        <div className="text-neutral-300 max-w-xl mx-auto">
+                        <div className="text-neutral-300 dark:text-neutral-700 max-w-xl mx-auto">
                             <p className="whitespace-normal text-md text-center mt-10 sm:mt-0">Playlists you have created before are here for you to add songs.</p>
                             <p className="whitespace-normal text-md text-center my-10">If you wish to create a new playlist you can do that with this form.</p>
                             <p className="whitespace-normal text-md text-center my-10">You need to enter the playlist name, also if you want you can enter the playlist description and make this playlist private if you wish.</p>

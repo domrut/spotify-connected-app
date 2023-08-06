@@ -8,14 +8,14 @@ function Auth() {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const logoutHandler = () => {
-        sessionStorage.clear();
+        localStorage.removeItem("token");
         dispatch(updateAuth(false));
         nav("/")
     }
 
     return (
         <div className="mt-20 sm:ml-20 sm:mt-0 items-center">
-            {sessionStorage.getItem("token") ?
+            {localStorage.getItem("token") ?
                 <Logout logoutHandler={logoutHandler}/> :
                 null}
         </div>

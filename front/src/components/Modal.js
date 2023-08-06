@@ -21,7 +21,7 @@ function Modal({store}) {
                 const res = await http.post("addItemsToPlaylist",
                     {
                         url: `https://api.spotify.com/v1/playlists/${selectedPlaylist}/tracks?uris=${chunk.join(",")}`,
-                        token: sessionStorage.getItem("token")
+                        token: localStorage.getItem("token")
                     }
                 );
                 if (res.error) {
@@ -43,24 +43,24 @@ function Modal({store}) {
     return (
         <>
             <div onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="top-0 bottom-0 right-0 left-0 z-20 absolute bg-black opacity-70"></div>
-            <div className="absolute w-[200px] p-3 2xs:p-0 2xs:w-[300px] z-[21] h-[400px] sm:w-[500px] rounded-md bg-sectionColor top-[30%] left-0 right-0 m-auto translate-y-[-50%]">
+            <div className="absolute w-[200px] p-3 2xs:p-0 2xs:w-[300px] z-[21] h-[400px] sm:w-[500px] rounded-md bg-sectionColor dark:bg-sectionColorLight top-[30%] left-0 right-0 m-auto translate-y-[-50%]">
                     {isDataSent ?
                         <div className="text-center mt-[2rem] sm:mt-[4rem]">
                             <SentCheckmark />
-                            <p className="text-white text-xl my-10">Songs added</p>
-                            <button className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-3 font-semibold tracking-wide w-max hover:bg-green-500" onClick={toPlaylist}>Go to playlist</button>
+                            <p className="text-white dark:text-black text-xl my-10">Songs added</p>
+                            <button className="rounded-xl transition duration-300 ease-in border-2 border-black bg-green-700 dark:bg-green-500 text-center p-2 sm:p-3 font-semibold tracking-wide w-max hover:bg-green-500 dark:hover:bg-green-700" onClick={toPlaylist}>Go to playlist</button>
                         </div> :
                         <div className="flex flex-col items-center mt-[3rem] sm:mt-[4rem]">
-                            <p className="text-white text-base whitespace-normal text-center sm:text-xl my-10">Select the playlist to add songs</p>
+                            <p className="text-white dark:text-black text-base whitespace-normal text-center sm:text-xl my-10">Select the playlist to add songs</p>
                             <div className="playlist_svg">
-                                <select className="my-2 sm:w-[250px] w-[180px] mb-14 bg-sectionColor rounded-md border-2 p-2 border-white text-white" onChange={event => setSelectedPlaylist(event.target.value)} name="playlists"
+                                <select className="my-2 sm:w-[250px] w-[180px] mb-14 bg-sectionColor dark:bg-sectionColorLight rounded-md border-2 p-2 border-white dark:border-black text-white dark:text-black" onChange={event => setSelectedPlaylist(event.target.value)} name="playlists"
                                         id="playlists">
                                     {store.playlists.filter(item => item.owner.id === store.currentUser.id).map((el, index) => {
-                                        return <option className="bg-sectionColor text-white" key={index} value={el.id}>{el.name}</option>
+                                        return <option className="bg-sectionColor dark:bg-sectionColorLight text-white dark:text-black" key={index} value={el.id}>{el.name}</option>
                                     })}
                                 </select>
                             </div>
-                            <button className="rounded-xl border-2 border-black bg-green-700 text-center p-2 sm:p-3 font-semibold tracking-wide w-max hover:bg-green-500" onClick={addToPlaylist}>Add to play list</button>
+                            <button className="rounded-xl transition duration-300 ease-in border-2 border-black bg-green-700 dark:bg-green-500 text-center p-2 sm:p-3 font-semibold tracking-wide w-max hover:bg-green-500 dark:hover:bg-green-700" onClick={addToPlaylist}>Add to play list</button>
                         </div>
                     }
             </div>

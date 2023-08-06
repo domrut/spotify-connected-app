@@ -23,15 +23,15 @@ function ArtistPage({store}) {
     useEffect(() => {
         const getArtistAlbums = async () => {
             setIsLoading(true);
-            const res = await http.post("getArtistAlbums", {id: params.id, token: sessionStorage.getItem("token")})
+            const res = await http.post("getArtistAlbums", {id: params.id, token: localStorage.getItem("token")})
             res.error ?
                 dispatch(updateError({code: res.error.status, message: res.error.message})) :
                 dispatch(updateArtistAlbums(res.data.items))
-            const resSecond = await http.post("getArtist", {id: params.id, token: sessionStorage.getItem("token")})
+            const resSecond = await http.post("getArtist", {id: params.id, token: localStorage.getItem("token")})
             resSecond.error ?
                 dispatch(updateError({code: res.error.status, message: res.error.message})) :
                 setArtist(resSecond.data)
-            const resThird = await http.post("getRelatedArtists", {id: params.id, token: sessionStorage.getItem("token")})
+            const resThird = await http.post("getRelatedArtists", {id: params.id, token: localStorage.getItem("token")})
             resSecond.error ?
                 dispatch(updateError({code: res.error.status, message: res.error.message})) :
                 setRelatedArtists(resThird.data)
@@ -59,8 +59,8 @@ function ArtistPage({store}) {
                         }
                     </div>
                     <div className="section-styling">
-                        <p className="text-xl text-center mt-10 text-white">Top "{artist.name}" albums</p>
-                        <span className="text-center p-0 mb-10 text-xs text-neutral-400 block">(Use search to find more)</span>
+                        <p className="text-xl text-center mt-10 text-white dark:text-black">Top "{artist.name}" albums</p>
+                        <span className="text-center p-0 mb-10 text-xs text-neutral-400 dark:text-neutral-700 block">(Use search to find more)</span>
                         <div
                             className="flex-wrap block 2xs:flex h-[800px] content-start justify-center max-h-[800px] overflow-y-scroll">
                             {store.artistAlbums.length !== 0 && store.artistAlbums.map((el, index) => {

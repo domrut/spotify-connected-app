@@ -41,8 +41,8 @@ function Track({artists, duration, explicit, uri, id, name, listen, index, selec
 
     return (
         <div
-             className={`text-white relative m-1 cursor-pointer ${selectedTracks.includes(uri) ? "bg-green-900" : "bg-neutral-900"} items-center track-styling mb-2 sm:mb-5 grid grid-flow-col auto-cols-mobileTrack sm:auto-cols-track`}>
-            <p className="text-neutral-400 w-max text-xs sm:text-base">{index + 1}</p>
+             className={`text-white dark:text-black relative m-1 cursor-pointer ${selectedTracks.includes(uri) ? "bg-green-900 dark:bg-green-600" : "bg-neutral-900 dark:bg-neutral-300"} items-center track-styling mb-2 sm:mb-5 grid grid-flow-col auto-cols-mobileTrack sm:auto-cols-track`}>
+            <p className="text-neutral-400 dark:text-neutral-700 w-max text-xs sm:text-base">{index + 1}</p>
             <div className="absolute bg-transparent top-0 bottom-0 left-0 right-0 w-full h-full"
                  onClick={() => selectTrack(uri)}>
             </div>

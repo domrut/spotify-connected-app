@@ -16,7 +16,7 @@ function SearchResults({store}) {
         if (Object.values(store.searchResult)[0].next === null) return;
         setIsLoading(true);
         const res = await http.post("nextPage", {
-            url: Object.values(store.searchResult)[0].next, token: sessionStorage.getItem("token")
+            url: Object.values(store.searchResult)[0].next, token: localStorage.getItem("token")
         });
         if (res.error) {
             dispatch(updateError({code: res.error.status, message: res.error.message}))
@@ -79,9 +79,9 @@ function SearchResults({store}) {
 
     return (
         <>
-            <label className="flex m-auto text-white filter_icon max-w-[17rem] mb-24">
+            <label className="flex m-auto text-white dark:text-black filter_icon max-w-[17rem] mb-24">
                     <input
-                        className="my-2 outline-none w-full bg-sectionColor border-b-2 border-white text-white px-2 py-0.5"
+                        className="my-2 outline-none w-full bg-sectionColor dark:bg-sectionColorLight border-b-2 border-white dark:border-black text-white dark:text-black px-2 py-0.5"
                         type="text"
                         onChange={(e) => filterHandler(e.target.value)}
                         placeholder={`Filter by ${Object.keys(store.searchResult)[0]} name`}/>
@@ -91,7 +91,7 @@ function SearchResults({store}) {
                 {isLoading && <Loader/>}
                 {Object.values(store.searchResult)[0].next !== null &&
                     <div className="w-full text-center">
-                        <button className="text-white mt-5 font-semibold text-base"
+                        <button className="text-white dark:text-black mt-5 font-semibold text-base"
                                 onClick={fetchAdditionalResults}>Load more
                         </button>
                     </div>

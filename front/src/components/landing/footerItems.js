@@ -5,7 +5,7 @@ import Linkedin from "../../svgs/linkedin";
 function FooterItems() {
     return (
         <>
-            <div className="text-neutral-400 flex items-center justify-between px-7 pt-20 max-w-[1160px] mx-auto">
+            <div className="text-neutral-400 dark:text-black flex items-center justify-between px-7 pt-20 max-w-[1160px] mx-auto">
                 <div className="text-xs">
                     <p> Idea by
                         <a className="underline ml-1.5"
