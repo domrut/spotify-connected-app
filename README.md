@@ -17,8 +17,9 @@ To run the node.js server run `nodemon server` in `/back` folder
 
 To run react app type `run npm start` in `/front` folder
 
-Dummy testing account:
+# Dummy testing account:
 
+(You won't be able to sign in without this account since the application is in development mode, e-mails have to be whitelisted)
 
 Email: spotify.test.acc.app@gmail.com
 
