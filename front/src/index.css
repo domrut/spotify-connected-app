@@ -118,8 +118,14 @@ body {
     @apply transition duration-300 ease-in;
 }
 
-.btn-nav:hover, .btn-nav:active {
+.btn-nav:hover {
     @apply border-black bg-white text-black dark:bg-black dark:text-white
+}
+
+@media (hover: none) {
+    .btn-nav {
+        @apply border-black bg-white text-black dark:bg-black dark:text-white
+    }
 }
 
 ::-webkit-scrollbar {
