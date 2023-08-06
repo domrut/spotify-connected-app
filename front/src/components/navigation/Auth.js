@@ -14,7 +14,7 @@ function Auth() {
     }
 
     return (
-        <div className="mt-20 sm:ml-20 sm:mt-0 items-center">
+        <div className="mt-20 sm:ml-5 sm:mt-0 items-center">
             {localStorage.getItem("token") ?
                 <Logout logoutHandler={logoutHandler}/> :
                 null}
