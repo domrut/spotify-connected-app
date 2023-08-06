@@ -42,7 +42,7 @@ function Modal({store}) {
 
     return (
         <>
-            <div onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="top-0 bottom-0 right-0 left-0 z-20 absolute bg-black opacity-70"></div>
+            // <div onClick={() => dispatch(updateModalMenu(!modalStore.modalOpen))} className="top-0 bottom-0 right-0 left-0 z-20 absolute bg-black opacity-70"></div>
             <div className="fixed w-[200px] p-3 2xs:p-0 2xs:w-[300px] z-[21] h-[400px] sm:w-[500px] rounded-md bg-sectionColor dark:bg-sectionColorLight top-[30%] left-0 right-0 m-auto translate-y-[-50%]">
                     {isDataSent ?
                         <div className="text-center mt-[2rem] sm:mt-[4rem]">
