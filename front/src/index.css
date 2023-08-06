@@ -124,7 +124,7 @@ body {
 
 @media (hover: none) {
     .btn-nav {
-        @apply border-black bg-white text-black dark:bg-black dark:text-white
+       @apply bg-transparent border-2 border-white text-white dark:border-black dark:text-black
     }
 }
 
