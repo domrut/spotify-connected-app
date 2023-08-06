@@ -6,10 +6,9 @@ import {updateHamburgerMenu} from "../../features/hamburgerMenuStore";
 import LightMode from "../../svgs/lightMode";
 import DarkMode from "../../svgs/darkMode";
 
-function NavItems({store}) {
+function NavItems({store, setIsDark, isDark}) {
     const hamburgerMenuStore = useSelector(store => store.hamburgerMenuStore);
     const dispatch = useDispatch();
-    const [isDark, setIsDark] = useState(true);
     const closeModal = () => {
         dispatch(updateHamburgerMenu(!hamburgerMenuStore.isOpen))
     }
@@ -47,7 +46,7 @@ function NavItems({store}) {
                     <NavLink onClick={closeModal} className="btn-nav mt-4 sm:mt-0 sm:ml-2" to="/selectedSongs">
                         Selected
                     </NavLink>
-                    <div onClick={changeLightMode}>
+                    <div className="my-10 sm:my-0 ml-0 sm:ml-20" onClick={changeLightMode}>
                         {isDark ? <LightMode/> : <DarkMode/>}
                     </div>
                 </>
