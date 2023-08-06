@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     './index.html',
@@ -31,7 +32,8 @@ module.exports = {
         "4xl": "2025px"
       },
       colors: {
-        "sectionColor" : "#121212"
+        "sectionColor" : "#121212",
+        "sectionColorLight" : "#f2f2f2"
       },
       flex: {
         '2': '2 1 0%',

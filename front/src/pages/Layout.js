@@ -13,11 +13,11 @@ import SelectedSongsPage from "./SelectedSongsPage";
 
 function Layout({store}) {
     return (
-        <div className={`font-poppins min-h-[98vh] relative ${sessionStorage.getItem("token") ? "m-2" : "0"}`}>
-            {sessionStorage.getItem("token") && <Nav store={store}/>}
-            <main className={`m-auto ${sessionStorage.getItem("token") ? "pb-[3rem]" : ""}`}>
+        <div className={`font-poppins min-h-[98vh] relative ${localStorage.getItem("token") ? "m-2" : "0"}`}>
+            {localStorage.getItem("token") && <Nav store={store}/>}
+            <main className={`m-auto ${localStorage.getItem("token") ? "pb-[3rem]" : ""}`}>
                 <Routes>
-                    {!sessionStorage.getItem("token") ? <Route path="*" element={<Home/>}/>
+                    {!localStorage.getItem("token") ? <Route path="*" element={<Home/>}/>
                     :
                         <>
                             <Route path="/search" element={<SearchPage store={store}/>}/>
@@ -31,7 +31,7 @@ function Layout({store}) {
                     }
                 </Routes>
             </main>
-            {sessionStorage.getItem("token") && <Footer/>}
+            {localStorage.getItem("token") && <Footer/>}
         </div>
     );
 }

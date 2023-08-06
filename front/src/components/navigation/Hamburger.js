@@ -10,9 +10,9 @@ function Hamburger() {
     return (
         <>
             <HamburgerStyled className="flex sm:hidden" onClick={() => dispatch(updateHamburgerMenu(!store.isOpen))} isOpen={store.isOpen}>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div className="dark:bg-black"></div>
+                <div className="dark:bg-black"></div>
+                <div className="dark:bg-black"></div>
             </HamburgerStyled>
         </>
     );

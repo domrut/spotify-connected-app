@@ -15,7 +15,7 @@ function TrackAlbum({artists, tracks, type, name, image, copyrights, external_ur
                     <div>
                         {artists && artists.map((el, index) => {
                             return <Link
-                                className="text-sm inline break-words hover:text-neutral-200"
+                                className="text-sm inline break-words hover:text-neutral-200 dark:hover:text-neutral-800"
                                 key={index}
                                 to={`/artists/${el.id}/albums`}>
                                 {el.name}
@@ -24,7 +24,7 @@ function TrackAlbum({artists, tracks, type, name, image, copyrights, external_ur
                         })}
                     </div>
                 </div>
-                <div className="flex flex-col 2xs:flex-row xs:flex-col my-2 sm:my-0 sm:flex-row [&>*]:mr-2 text-neutral-400">
+                <div className="flex flex-col 2xs:flex-row xs:flex-col my-2 sm:my-0 sm:flex-row [&>*]:mr-2 text-neutral-400 dark:text-neutral-700">
                     <p>{releaseDate}</p>
                     <p>{tracks} songs</p>
                     <p className="whitespace-normal">{toReadableTime(itemDuration).split(":").join(" min ")} sec</p>
@@ -35,7 +35,7 @@ function TrackAlbum({artists, tracks, type, name, image, copyrights, external_ur
                         <SpotifyLogo/>
                     </Link>
                 </div>
-                <p className="text-2xs mb-2 text-neutral-400 whitespace-normal">{copyrights[0].text}</p>
+                <p className="text-2xs mb-2 text-neutral-400 dark:text-neutral-700 whitespace-normal">{copyrights[0].text}</p>
             </div>
         </>
     );

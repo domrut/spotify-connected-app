@@ -1,10 +1,7 @@
 {
   "short_name": "Spotify Connected App",
   "name": "Spotify Connected App",
-  "icons": [{
-    "src": "favicon.ico",
-    "sizes": "512x512"
-  }],
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

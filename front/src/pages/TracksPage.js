@@ -19,7 +19,7 @@ function TracksPage({store}) {
             setIsLoading(true);
             const res = await http.post("playListTracks", {
                 url: `https://api.spotify.com/v1/${params.type}/${params.id}/tracks`,
-                token: sessionStorage.getItem("token")
+                token: localStorage.getItem("token")
             });
             if (res.error) {
                 dispatch(updateError({code: res.error.status, message: res.error.message}))
@@ -28,7 +28,7 @@ function TracksPage({store}) {
                 if (params.type === "playlists") {
                     const resPlaylist = await http.post("getAlbumOrPlaylist", {
                         url: `https://api.spotify.com/v1/${params.type}/${params.id}`,
-                        token: sessionStorage.getItem("token")
+                        token: localStorage.getItem("token")
                     });
                     setTypeInfo(resPlaylist.data)
                     dispatch(updateTrackURIs(res.data.items.map(el => ({uri: el.track.uri, selected: false}))))
@@ -37,7 +37,7 @@ function TracksPage({store}) {
                 if (params.type === "albums") {
                     const resAlbum = await http.post("getAlbumOrPlaylist", {
                         url: `https://api.spotify.com/v1/${params.type}/${params.id}`,
-                        token: sessionStorage.getItem("token")
+                        token: localStorage.getItem("token")
                     });
                     setTypeInfo(resAlbum.data)
                     dispatch(updateTrackURIs(res.data.items.map(el => ({uri: el.uri, selected: false}))))
@@ -46,7 +46,7 @@ function TracksPage({store}) {
             }
             const fetchAudioData = await http.post("getTracksInfo", {
                 url: `https://api.spotify.com/v1/audio-features?ids=${audioArray.join(",")}`,
-                token: sessionStorage.getItem("token")
+                token: localStorage.getItem("token")
             })
             dispatch(updateTracksAudioData(fetchAudioData.data.audio_features))
             setIsLoading(false);

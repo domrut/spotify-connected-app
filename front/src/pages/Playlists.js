@@ -25,7 +25,7 @@ function Playlists({store}) {
         setRefresh(false);
         setIsLoading(true);
         const getMyPlaylists = async () => {
-            const res = await http.post("getMyPlaylists", {token: sessionStorage.getItem("token")});
+            const res = await http.post("getMyPlaylists", {token: localStorage.getItem("token")});
             if (res.error) {
                 dispatch(updateError({code: res.error.status, message: res.error.message}))
             } else {
@@ -44,7 +44,7 @@ function Playlists({store}) {
                     className="flex-wrap block 2xs:flex h-[800px] content-start overflow-x-hidden justify-center max-h-[800px] overflow-y-scroll">
                     {isLoading ? <Loader/> :
                         <>
-                            <p className="text-white text-2xl font-bold tracking-wide w-full text-center my-10">My
+                            <p className="text-white dark:text-black text-2xl font-bold tracking-wide w-full text-center my-10">My
                                 playlists</p>
                             {store.playlists ? store.playlists.map((el, index) => {
                                 return <Playlist
