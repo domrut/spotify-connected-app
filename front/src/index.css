@@ -118,13 +118,9 @@ body {
     @apply transition duration-300 ease-in;
 }
 
-.btn-nav:hover {
-    @apply border-black bg-white text-black dark:bg-black dark:text-white
-}
-
-@media (hover: none) {
-    .btn-nav {
-       @apply bg-transparent border-2 border-white text-white dark:border-black dark:text-black
+@media (hover: hover) {
+    .btn-nav:hover {
+        @apply border-black bg-white text-black dark:bg-black dark:text-white
     }
 }
 
