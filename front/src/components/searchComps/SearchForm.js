@@ -21,7 +21,7 @@ function SearchForm({input, selectedCategory, searchHandler}) {
                     <option className="bg-sectionColor dark:bg-sectionColorLight text-white dark:text-black" value="playlist">Playlist</option>
                 </select>
             </label>
-            <Button className="btn-nav" onClick={(e) => searchHandler(e)}>Search</Button>
+            <button className="btn-nav" onClick={(e) => searchHandler(e)}>Search</button>
         </form>
     );
 }
