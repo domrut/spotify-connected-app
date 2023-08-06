@@ -15,7 +15,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.listen(3002, '192.168.0.105')
+app.listen(PORT, () => {
+    console.log(`app is running on ${PORT}`)
+} )
 
 app.get('/login', (req, res) => {
     let auth_query_parameters = new URLSearchParams({
