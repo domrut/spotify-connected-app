@@ -20,7 +20,7 @@ function Home() {
             const trimmedToken = window.location.pathname.split("auth=loggedIn/")[1];
             localStorage.setItem("token", trimmedToken)
             dispatch(updateAuth(true));
-            nav("search")
+            nav("my-library")
         }
     }, [])
 
