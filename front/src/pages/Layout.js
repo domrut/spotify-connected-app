@@ -27,7 +27,7 @@ function Layout({store}) {
                             <Route path="/my-library/" element={<Playlists store={store}/>}/>
                             <Route path="/selectedSongs" element={<SelectedSongsPage store={store}/>}/>
                             <Route path="/:type/:id/tracks" element={<TracksPage store={store}/>}/>
-                            <Route path="/" element={<Navigate to={"/search"}/>}/>
+                            <Route path="/" element={<Navigate to={"/my-library"}/>}/>
                             <Route path="*" element={<Error404/>}/>
                         </>
                     }
