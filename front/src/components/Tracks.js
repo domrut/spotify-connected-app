@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {updateTracks, updateTracksAudioData} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import TracksLegend from "./TracksLegend";
@@ -15,6 +15,7 @@ function Tracks({store, type, totalTracks}) {
     const params = useParams();
     const dispatch = useDispatch();
     const input = useRef();
+    const nav = useNavigate();
     const filterHandler = (value) => {
         const filterTempo = store.tracksAudioData.filter(item => item.tempo >= value);
         let arr;
@@ -99,14 +100,17 @@ function Tracks({store, type, totalTracks}) {
                     <p className="whitespace-normal">You can select songs through multiple sources, they are still saved under <strong>"Selected"</strong></p>
                     <p className="whitespace-normal">Some songs you can preview before selecting them by clicking on play button</p>
                 </div>
+                <div className="flex flex-col items-center">
+                <button className="rounded-xl transition duration-300 ease-in border-2 border-black bg-green-700 dark:bg-green-500 text-center p-2 sm:p-3 font-semibold tracking-wide w-max hover:bg-green-500 dark:hover:bg-green-700 mb-10" onClick={() => nav("/selectedSongs")}>Check selected songs</button>
                 <label className="flex m-auto text-white dark:text-black filter_icon max-w-[15rem] mb-5">
-                    <input
+                        <input
                         className="my-2 outline-none w-full bg-sectionColor dark:bg-sectionColorLight border-b-2 border-white dark:border-black text-white dark:text-black px-2 py-0.5"
-                        type="text"
+                        type="number"
                         ref={input}
                         onChange={(e) => filterHandler(e.target.value)}
-                        placeholder="Enter numeric value"/>
+                        placeholder="Filter by tempo"/>
                 </label>
+                </div>
             </div>
             <div className="max-w-[1300px] w-full m-auto">
                 <TracksLegend/>
