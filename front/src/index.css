@@ -141,3 +141,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     @apply bg-[#555555] dark:bg-black;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
