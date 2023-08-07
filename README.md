@@ -26,4 +26,6 @@ Email: spotify.test.acc.app@gmail.com
 
 Pass: fortesting123
 
+Initial load may take time, since back-end is hosted on a free service, which may take time to raise the server from sleep.
+
 URL: https://spotify-connected-app.vercel.app
