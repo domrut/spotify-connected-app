@@ -9,6 +9,7 @@ function Auth() {
     const dispatch = useDispatch();
     const logoutHandler = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("expiresAt");
         dispatch(updateAuth(false));
         nav("/")
     }
