@@ -37,6 +37,7 @@ function Modal({store}) {
 
     const toPlaylist = () => {
         dispatch(updateModalMenu(!modalStore.modalOpen))
+        dispatch(updateTracks([]));
         nav(`/playlists/${selectedPlaylist}/tracks`)
     }
 
