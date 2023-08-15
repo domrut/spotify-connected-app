@@ -19,6 +19,7 @@ function Home() {
         if (window.location.pathname.includes("auth=loggedIn/")) {
             const trimmedToken = window.location.pathname.split("auth=loggedIn/")[1];
             localStorage.setItem("token", trimmedToken)
+            localStorage.setItem("expiresAt", new Date().getTime() + (60*60*1000) + "");
             dispatch(updateAuth(true));
             nav("my-library")
         }
