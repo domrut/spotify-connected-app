@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {updateModalMenu} from "../features/hamburgerMenuStore";
 import http from "../plugins/http";
-import {updateError, updateSelectedTrackURIs} from "../features/spotifyStore";
+import {updateError, updateSelectedTrackURIs, updateTracks} from "../features/spotifyStore";
 import SentCheckmark from "../svgs/sentCheckmark";
 import {useNavigate} from "react-router";
 
