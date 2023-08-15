@@ -12,11 +12,19 @@ function App() {
 
     useEffect(() => {
         localStorage.getItem("token") && dispatch(updateAuth(true))
-        if (store.error.message === "The access token expired") {
-            localStorage.removeItem("token");
-            nav("/")
+        if (localStorage.getItem("expiresAt")) {
+            if (new Date().getTime() > Number(localStorage.getItem("expiresAt"))) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("expiresAt");
+                nav("/")
+            }
         }
-    }, [store.error])
+        setTimeout(() => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("expiresAt");
+            nav("/")
+        }, Number(localStorage.getItem("expiresAt")) - new Date().getTime())
+    }, [])
 
     useEffect(() => {
         const element = document.getElementsByTagName("html");
