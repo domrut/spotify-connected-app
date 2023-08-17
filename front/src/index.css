@@ -110,7 +110,7 @@ p {
 }
 
 body {
-    @apply bg-black dark:bg-neutral-300 box-border overflow-x-hidden
+    @apply bg-black dark:bg-neutral-300 box-border overflow-x-hidden antialiased;
 }
 
 .btn-nav {
