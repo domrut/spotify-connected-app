@@ -14,7 +14,7 @@ import {Navigate} from "react-router";
 
 function Layout({store}) {
     return (
-        <div className={`font-poppins min-h-[98vh] relative ${localStorage.getItem("token") ? "m-2" : "0"}`}>
+        <div className={`min-h-[98vh] relative ${localStorage.getItem("token") ? "m-2" : "0"}`}>
             {localStorage.getItem("token") && <Nav store={store}/>}
             <main className={`m-auto ${localStorage.getItem("token") ? "pb-[3rem]" : ""}`}>
                 <Routes>
