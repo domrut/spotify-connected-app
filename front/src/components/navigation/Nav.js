@@ -14,7 +14,7 @@ function Nav({store}) {
     return (
         <nav className="flex justify-between py-4 items-center section-styling mb-2">
             <div className="w-10 h-10">
-                <NavLink to="/my-library">
+                <NavLink aria-label={"Home"} to="/my-library">
                     <NavLogo/>
                 </NavLink>
             </div>

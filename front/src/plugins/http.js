@@ -18,14 +18,5 @@ export default {
 
 
         return await res.json();
-    },
-    spotifyPost: async (url, token) => {
-        const response = await fetch(`${url}`, {
-            method: "get",
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        })
-        return await response.json();
     }
 }

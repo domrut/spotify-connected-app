@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from "react-router";
 import {updateTracks, updateTracksAudioData, updateTrackURIs} from "../../../features/spotifyStore";
 import {useDispatch} from "react-redux";
+import fillerImage from "../../../assets/fillerImage.webp"
 
 function Playlist({name, id, owner, image, trackTotal}) {
     const nav = useNavigate();
@@ -16,11 +17,9 @@ function Playlist({name, id, owner, image, trackTotal}) {
     return (
         <div onClick={() => clearStoreAndNavigate(id)}
             className="search-result-styling">
-            {image.length !== 0 &&
                 <img
                     className="album-card-image 2xs:h-[100px] 2xs:w-[100px] xs:h-[150px] xs:w-[150px] sm:m-auto rounded-md"
-                    src={image[0].url} alt=""/>
-            }
+                    src={image.length !== 0 ? image[0].url : fillerImage} width={"150px"} height={"150px"} alt=""/>
             <div className="truncate flex flex-col justify-evenly pl-2 2xs:p-3 xs:p-0 sm:mt-2">
                 <div className="text-left items-center xs:px-0 pt-2 xs:pt-4">
                     <span

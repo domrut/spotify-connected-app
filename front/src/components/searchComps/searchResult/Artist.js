@@ -10,7 +10,7 @@ function Artist({name, id, image, genres, followers, isInArtistPage}) {
             {image.length !== 0 ?
                 <img
                     className="album-card-image min-w-[60px] 2xs:min-w-[100px] 2xs:h-[100px] 2xs:w-[100px] xs:h-[150px] xs:w-[150px] sm:m-auto rounded-md"
-                    src={image[0].url} loading="lazy" alt=""/>
+                    src={image[0].url} width={"150px"} height={"150px"} loading="lazy" alt=""/>
                 :
                 <ArtistFillerImage/>
             }
