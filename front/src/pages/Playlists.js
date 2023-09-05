@@ -67,9 +67,4 @@ function Playlists({store}) {
     );
 }
 
-// export default React.memo(Playlists, (props, nextProps) => {
-//     if (props.store.playlists.length === nextProps.store.playlists.length) {
-//         return true;
-//     }
-// });
 export default Playlists;
