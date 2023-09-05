@@ -68,7 +68,7 @@ const spotifyPostRequest = async (url, data, token) => {
 }
 app.post("/getMyPlaylists", async (req, res) => {
     const {token} = req.body;
-    const data = await spotifyRequest("https://api.spotify.com/v1/me/playlists", token)
+    const data = await spotifyRequest("https://api.spotify.com/v1/me/playlists?limit=50&offset=0", token)
     const dataUser = await spotifyRequest(`https://api.spotify.com/v1/me`, token);
     (data.error || dataUser.error) ? res.send({
         error: {

@@ -55,4 +55,8 @@ function Album({name, image, releaseDate, artists, id, albumType}) {
     );
 }
 
-export default Album;
+export default React.memo(Album, (props, nextProps) => {
+    if (props.name === nextProps.name) {
+        return true;
+    }
+});

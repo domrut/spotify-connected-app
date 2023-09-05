@@ -39,4 +39,4 @@ function Playlist({name, id, owner, image, trackTotal}) {
     );
 }
 
-export default Playlist;
+export default React.memo(Playlist);

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import SpotifyLogo from "../svgs/spotifyLogo";
 import {Link} from "react-router-dom";
 import NavLogo from "../svgs/navLogo";
@@ -13,7 +13,6 @@ import LandingFooter from "../components/landing/LandingFooter";
 function Home() {
     const nav = useNavigate();
     const dispatch = useDispatch();
-    const [islocal, setisLocal] = useState();
 
     useEffect(() => {
         if (window.location.pathname.includes("auth=loggedIn/")) {

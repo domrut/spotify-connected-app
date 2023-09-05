@@ -38,4 +38,8 @@ function Artist({name, id, image, genres, followers, isInArtistPage}) {
     );
 }
 
-export default Artist;
+export default React.memo(Artist, (props, nextProps) => {
+    if (props.name === nextProps.name) {
+        return true;
+    }
+})

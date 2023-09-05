@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import Track from "./searchComps/searchResult/Track";
 import http from "../plugins/http";
 import {useNavigate, useParams} from "react-router";
-import {updateTracks, updateTracksAudioData} from "../features/spotifyStore";
+import {updateSelectedTrackURIs, updateTracks, updateTracksAudioData} from "../features/spotifyStore";
 import {useDispatch} from "react-redux";
 import TracksLegend from "./TracksLegend";
 import NextPage from "../svgs/nextPage";
@@ -48,9 +48,12 @@ function Tracks({store, type, totalTracks}) {
             setFilteredArrayData(fetchAudioData.data.audio_features)
             setFilteredArray(res.data.items)
         }
-
         fetchMoreTracks().catch(console.error)
     }, [page])
+
+    const selectTrack = (uri) => {
+        dispatch(updateSelectedTrackURIs(uri))
+    }
 
     const items = () => {
         if (type === "playlists") {
@@ -62,11 +65,12 @@ function Tracks({store, type, totalTracks}) {
                     id={el.track.id}
                     uri={el.track.uri}
                     name={el.track.name}
+                    selectTrack={() => selectTrack(el.uri)}
+                    isLiked={store.selectedTrackURIs.includes(el.uri)}
                     listen={el.track.preview_url}
                     index={index}
                     added={el.added_at}
                     tempo={filteredArrayData[index] !== null ? filteredArrayData[index].tempo : 0}
-                    selectedTracks={store.selectedTrackURIs}
                     key={index}
                 />
             })
@@ -80,11 +84,12 @@ function Tracks({store, type, totalTracks}) {
                     id={el.id}
                     uri={el.uri}
                     name={el.name}
+                    selectTrack={() => selectTrack(el.uri)}
+                    isLiked={store.selectedTrackURIs.includes(el.uri)}
                     listen={el.preview_url}
                     index={index}
                     added={totalTracks.release_date}
                     tempo={filteredArrayData[index] !== null ? filteredArrayData[index].tempo : 0}
-                    selectedTracks={store.selectedTrackURIs}
                     key={index}
                 />
             })

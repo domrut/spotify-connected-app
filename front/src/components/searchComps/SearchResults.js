@@ -10,28 +10,27 @@ import Playlist from "./searchResult/Playlist";
 function SearchResults({store}) {
 
     const dispatch = useDispatch();
-    const [filteredArray, setFilteredArray] = useState(store.additionalSearches)
+    const [filteredArray, setFilteredArray] = useState(Object.values(store.searchResult)[0].items)
+    const [nextPage, setNextPage] = useState(Object.values(store.searchResult)[0].next);
     const [isLoading, setIsLoading] = useState(false);
     const fetchAdditionalResults = async () => {
         if (Object.values(store.searchResult)[0].next === null) return;
         setIsLoading(true);
         const res = await http.post("nextPage", {
-            url: Object.values(store.searchResult)[0].next, token: localStorage.getItem("token")
+            url: nextPage, token: localStorage.getItem("token")
         });
         if (res.error) {
             dispatch(updateError({code: res.error.status, message: res.error.message}))
         } else {
-            dispatch(addSearchResults(res.data))
+            console.log(res, Object.values(res.data)[0].next);
+            setNextPage(Object.values(res.data)[0].next);
+            setFilteredArray(prevState => [...prevState, ...Object.values(res.data)[0].items])
             setIsLoading(false);
         }
     }
 
-    useEffect(() => {
-        setFilteredArray(store.additionalSearches);
-    }, [store.additionalSearches])
-
     const filterHandler = (value) => {
-        setFilteredArray(store.additionalSearches.filter(item => item.name.toLowerCase().includes(value.toLowerCase())))
+        setFilteredArray(filteredArray.filter(item => item.name.toLowerCase().includes(value.toLowerCase())))
     }
 
     const item = (type) => {
@@ -101,4 +100,4 @@ function SearchResults({store}) {
     );
 }
 
-export default SearchResults;
+export default React.memo(SearchResults);

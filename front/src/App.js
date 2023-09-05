@@ -41,7 +41,9 @@ function App() {
     }, [])
 
     return (
-        <Layout store={store}/>
+        <>
+            <Layout store={store}/>
+        </>
     );
 }
 

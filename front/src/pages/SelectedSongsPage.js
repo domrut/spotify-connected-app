@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import http from "../plugins/http";
-import {updateError} from "../features/spotifyStore";
+import {updateError, updateSelectedTrackURIs} from "../features/spotifyStore";
 import {useDispatch, useSelector} from "react-redux";
 import Loader from "../plugins/Loader";
 import Track from "../components/searchComps/searchResult/Track";
@@ -16,6 +16,7 @@ function SelectedSongsPage({store}) {
     const modalStore = useSelector(store => store.hamburgerMenuStore);
 
     useEffect(() => {
+        if (store.selectedTrackURIs.length === 0) return;
         let trackArray = [];
         setLoading(true);
         setSelectedSongs([]);
@@ -42,6 +43,10 @@ function SelectedSongsPage({store}) {
         }
         fetchInChunks();
     }, [])
+
+    const selectTrack = (uri) => {
+        dispatch(updateSelectedTrackURIs(uri))
+    }
 
     return (
         <div className="section-styling">
@@ -83,6 +88,8 @@ function SelectedSongsPage({store}) {
                                             index={index}
                                             selectedTracks={store.selectedTrackURIs}
                                             key={index}
+                                            selectTrack={() => selectTrack(el.uri)}
+                                            isLiked={store.selectedTrackURIs.includes(el.uri)}
                                         />
                                     })}
                                 </div>

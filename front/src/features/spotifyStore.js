@@ -14,7 +14,7 @@ export const spotifySlice = createSlice({
         recentSearches: [],
         additionalSearches: [],
         artistAlbums: [],
-        selectedTrackURIs: []
+        selectedTrackURIs: JSON.parse(localStorage.getItem("selectedTracks") || "[]")
     }, reducers: {
         updateError: (state, action) => {
             state.error = action.payload;
@@ -41,12 +41,11 @@ export const spotifySlice = createSlice({
         updateSearchResults: (state, action) => {
             state.additionalSearches = [];
             state.searchResult = action.payload;
-            action.payload.length !== 0 && state.additionalSearches.push(...Object.values(action.payload)[0].items)
         },
         addSearchResults: (state, action) => {
             if (state.additionalSearches.length >= Object.values(state.searchResult)[0].total) return;
             state.searchResult = action.payload;
-            state.additionalSearches.push(...Object.values(action.payload)[0].items)
+            Object.values(state.searchResult)[0].items = [...Object.values(state.searchResult)[0].items, ...Object.values(action.payload)[0].items]
         },
         updateRecentSearches: (state, action) => {
             const searchesArray = state.recentSearches;
@@ -64,13 +63,16 @@ export const spotifySlice = createSlice({
             state.artistAlbums = action.payload;
         },
         updateSelectedTrackURIs: (state, action) => {
-            if (state.selectedTrackURIs.filter(item => item === action.payload).length === 1) {
-                state.selectedTrackURIs = state.selectedTrackURIs.filter(item => !item.includes(action.payload))
+            let stateCopy = JSON.parse(localStorage.getItem("selectedTracks") || "[]");
+            if (stateCopy.filter(item => item === action.payload).length === 1) {
+                stateCopy = stateCopy.filter(item => !item.includes(action.payload))
             } else if (action.payload.length === 0) {
-                state.selectedTrackURIs = []
+                stateCopy = []
             } else {
-                state.selectedTrackURIs.push(action.payload)
+                stateCopy.push(action.payload)
             }
+            state.selectedTrackURIs = stateCopy;
+            localStorage.setItem("selectedTracks", JSON.stringify(stateCopy))
         }
     }
 });

@@ -11,7 +11,6 @@ function PlaylistAdd({user, setRefresh, refresh}) {
         name: useRef(),
         description: useRef()
     }
-
     const checkboxHandle = () => {
         setIsChecked(!isChecked);
     }

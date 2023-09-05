@@ -38,4 +38,4 @@ function Layout({store}) {
     );
 }
 
-export default Layout;
+export default React.memo(Layout);

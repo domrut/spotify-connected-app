@@ -1,19 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {updateSelectedTrackURIs} from "../../../features/spotifyStore";
 import toReadableTime from "../../../plugins/toReadableTime";
 import ExplicitLogo from "../../../svgs/explicitLogo";
 import PauseAudio from "../../../svgs/pauseAudio";
 import PlayAudio from "../../../svgs/playAudio";
 
-function Track({artists, duration, explicit, uri, id, name, listen, index, selectedTracks, added}) {
+function Track({artists, duration, explicit, uri, id, name, listen, selectTrack, isLiked, index, added}) {
 
     const dispatch = useDispatch();
     const audioRef = useRef();
-    const selectTrack = (id) => {
-        dispatch(updateSelectedTrackURIs(id))
-    }
     const [playing, setPlaying] = useState(false);
 
     useEffect(() => {
@@ -41,7 +37,7 @@ function Track({artists, duration, explicit, uri, id, name, listen, index, selec
 
     return (
         <div
-             className={`text-white dark:text-black relative m-1 cursor-pointer ${selectedTracks.includes(uri) ? "bg-green-900 dark:bg-green-600" : "bg-neutral-900 dark:bg-neutral-300"} items-center track-styling mb-2 sm:mb-5 grid grid-flow-col auto-cols-mobileTrack sm:auto-cols-track`}>
+             className={`text-white dark:text-black relative m-1 cursor-pointer ${isLiked ? "bg-green-900 dark:bg-green-600" : "bg-neutral-900 dark:bg-neutral-300"} items-center track-styling mb-2 sm:mb-5 grid grid-flow-col auto-cols-mobileTrack sm:auto-cols-track`}>
             <p className="text-neutral-400 dark:text-neutral-700 w-max text-xs sm:text-base">{index + 1}</p>
             <div className="absolute bg-transparent top-0 bottom-0 left-0 right-0 w-full h-full"
                  onClick={() => selectTrack(uri)}>
@@ -76,4 +72,8 @@ function Track({artists, duration, explicit, uri, id, name, listen, index, selec
     );
 }
 
-export default Track;
+export default React.memo(Track, (props, nextProps) => {
+    if (props.isLiked === nextProps.isLiked) {
+        return true;
+    }
+})
