@@ -65,8 +65,8 @@ function Tracks({store, type, totalTracks}) {
                     id={el.track.id}
                     uri={el.track.uri}
                     name={el.track.name}
-                    selectTrack={() => selectTrack(el.uri)}
-                    isLiked={store.selectedTrackURIs.includes(el.uri)}
+                    selectTrack={() => selectTrack(el.track.uri)}
+                    isLiked={store.selectedTrackURIs.includes(el.track.uri)}
                     listen={el.track.preview_url}
                     index={index}
                     added={el.added_at}
