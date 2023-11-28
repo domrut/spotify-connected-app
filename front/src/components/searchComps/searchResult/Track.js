@@ -73,7 +73,7 @@ function Track({artists, duration, explicit, uri, id, name, listen, selectTrack,
 }
 
 export default React.memo(Track, (props, nextProps) => {
-    if (props.isLiked === nextProps.isLiked) {
+    if (props.isLiked === nextProps.isLiked && props.uri === nextProps.uri) {
         return true;
     }
 })
